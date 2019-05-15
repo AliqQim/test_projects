@@ -8,10 +8,12 @@ namespace WebApplication1.Models
     public class B
     {
         private readonly string _controllernameBasedKey;
+        private readonly C _c;
 
-        public B(string controllernameBasedKey)
+        public B(string controllernameBasedKey, C c)
         {
             _controllernameBasedKey = controllernameBasedKey;
+            _c = c;
         }
 
         public string Say() => $"Hey! B! {_controllernameBasedKey}";
