@@ -12,8 +12,12 @@ namespace WebApplication1.App_Start
 {
     public class MyDependencyResolver : UnityDependencyResolver, IDependencyResolver
     {
+        private readonly IUnityContainer _container;
+
         public MyDependencyResolver(IUnityContainer container) : base(container)
-        { }
+        {
+            _container = container;
+        }
 
 
         object IDependencyResolver.GetService(Type serviceType)
@@ -25,8 +29,11 @@ namespace WebApplication1.App_Start
                 //имя класса не будет захардкоженным
                 //по той же причине мы не можем этот код положить на уровень Unity (кажись)
 
-                B b = new B(typeof(HomeController).ToString(), new C());  
-                A a = new A(b);
+                //B b = _container.Resolve<B>(new ParameterOverrides<Foo> {)
+
+
+                    //new B(typeof(HomeController).ToString(), new C());  
+                A a = _container.Resolve<A>(new ParameterOverride<B>())
                 hc.A = a;
             }
             return res;
