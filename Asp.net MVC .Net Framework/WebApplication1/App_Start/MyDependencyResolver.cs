@@ -30,12 +30,9 @@ namespace WebApplication1.App_Start
                 //по той же причине мы не можем этот код положить на уровень Unity (кажись)
 
                 B b = new B(typeof(HomeController).ToString(), new C());
-                A a = new A(b);
+                A a = _container.Resolve<A>(new DependencyOverride<B>(b));
+
                 hc.A = a;
-
-
-                //A a = _container.Resolve<A>(new ParameterOverride<B>())
-                //hc.A = a;
             }
             return res;
 
