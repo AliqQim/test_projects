@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Unity;
-using Unity.AspNet.Mvc;
 using WebApplication1.Controllers;
 using WebApplication1.Models;
+using Microsoft.Practices.Unity.Mvc;
+using Microsoft.Practices.Unity;
 
 namespace WebApplication1.App_Start
 {
@@ -29,12 +29,13 @@ namespace WebApplication1.App_Start
                 //имя класса не будет захардкоженным
                 //по той же причине мы не можем этот код положить на уровень Unity (кажись)
 
-                //B b = _container.Resolve<B>(new ParameterOverrides<Foo> {)
-
-
-                    //new B(typeof(HomeController).ToString(), new C());  
-                A a = _container.Resolve<A>(new ParameterOverride<B>())
+                B b = new B(typeof(HomeController).ToString(), new C());
+                A a = new A(b);
                 hc.A = a;
+
+
+                //A a = _container.Resolve<A>(new ParameterOverride<B>())
+                //hc.A = a;
             }
             return res;
 
