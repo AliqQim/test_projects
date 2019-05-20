@@ -17,6 +17,6 @@ namespace WebApplication1.Models
             _c = c;
         }
 
-        public string Say() => $"Hey! B! {_controllernameBasedKey}";
+        public string Say() => $"Hey! B! {_controllernameBasedKey} AND C is: {_c}";
     }
 }

@@ -29,11 +29,8 @@ namespace WebApplication1.App_Start
                 //имя класса не будет захардкоженным
                 //по той же причине мы не можем этот код положить на уровень Unity (кажись)
 
-                //B b = _container.Resolve<B>(new ParameterOverrides<Foo> {)
-
-
-                    //new B(typeof(HomeController).ToString(), new C());  
-                A a = _container.Resolve<A>(new ParameterOverride<B>())
+                B b = new B(typeof(HomeController).ToString(), new C());
+                A a = new A(b, new D());
                 hc.A = a;
             }
             return res;
