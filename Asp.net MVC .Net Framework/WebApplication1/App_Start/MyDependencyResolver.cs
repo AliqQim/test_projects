@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Unity;
 using Unity.AspNet.Mvc;
+using Unity.Resolution;
 using WebApplication1.Controllers;
 using WebApplication1.Models;
 
@@ -29,9 +30,7 @@ namespace WebApplication1.App_Start
                 //имя класса не будет захардкоженным
                 //по той же причине мы не можем этот код положить на уровень Unity (кажись)
 
-                B b = new B(typeof(HomeController).ToString(), new C());
-                A a = new A(b, new D());
-                hc.A = a;
+                hc.A = _container.Resolve<A>(new ParameterOverride("controllernameBasedKey", typeof(HomeController).ToString()));
             }
             return res;
 
