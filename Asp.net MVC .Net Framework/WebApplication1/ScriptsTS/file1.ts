@@ -1,1 +1,3 @@
-﻿alert(999)
+﻿import { f } from "./module1";
+
+f();
