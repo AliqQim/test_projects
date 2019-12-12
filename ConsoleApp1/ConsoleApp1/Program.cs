@@ -13,21 +13,17 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            using (var context = new MyContext())
+            var user = new User
             {
-                Console.WriteLine(context.Persons.Count());
-
-                //context.Persons.Add(new Person { Name = "петя", Age = 22 });
-                //context.Persons.Add(new Person { Name = "Вася", Age = 23 });
-
-                //context.SaveChanges();
-
-                foreach (var p in context.Persons)
+                Age = 21,
+                Name = "Алик",
+                Branch = new Branch
                 {
-                    Console.WriteLine($"{p.Name} {p.Age}");
+                    Name = "Подразделение 1"
                 }
+            };
 
-            }
+
 
             Console.WriteLine("Done!");
             Console.ReadKey();
