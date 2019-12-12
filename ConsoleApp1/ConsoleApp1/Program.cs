@@ -26,6 +26,8 @@ namespace ConsoleApp1
 
             var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDto>());
 
+            config.AssertConfigurationIsValid();
+
             var mapper = config.CreateMapper();
             var dto = mapper.Map<UserDto>(user);
 
