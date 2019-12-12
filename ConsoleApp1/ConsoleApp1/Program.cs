@@ -1,3 +1,4 @@
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,7 +24,10 @@ namespace ConsoleApp1
                 }
             };
 
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDto>());
 
+            var mapper = config.CreateMapper();
+            var dto = mapper.Map<UserDto>(user);
 
             Console.WriteLine("Done!");
             Console.ReadKey();
