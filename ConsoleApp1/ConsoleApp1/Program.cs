@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,30 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Person, AdultDto>());
+            config.AssertConfigurationIsValid();
+
+            using (var context = new MyContext())
+            {
+                context.Database.Log = sql => Debug.WriteLine(sql);
+
+                //context.Persons.Add(new Person { Name = "петя", Age = 22 });
+                //context.Persons.Add(new Person { Name = "Вася", Age = 23 });
+
+                //context.SaveChanges();
+
+                var adults = context.Persons.Where(x=>x.Age >= 18);
+                var adultsInfo = config.CreateMapper().Map<IEnumerable<AdultDto>>(adults);
+
+
+                foreach (var a in adultsInfo)
+                {
+                    Console.WriteLine($"{a.Name}");
+                }
+
+            }
+
+
             var user = new User
             {
                 Age = 21,
@@ -23,13 +48,6 @@ namespace ConsoleApp1
                     Name = "Подразделение 1"
                 }
             };
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDto>());
-
-            config.AssertConfigurationIsValid();
-
-            var mapper = config.CreateMapper();
-            var dto = mapper.Map<UserDto>(user);
 
             Console.WriteLine("Done!");
             Console.ReadKey();
@@ -43,9 +61,6 @@ namespace ConsoleApp1
 
         public string Name { get; set; }
         public int Age { get; set; }
-
-
-
     }
 
 
@@ -53,5 +68,10 @@ namespace ConsoleApp1
     public class MyContext : DbContext
     {
         public virtual DbSet<Person> Persons { get; set; }
+    }
+
+    public class AdultDto
+    {
+        public string Name { get; set; }
     }
 }
