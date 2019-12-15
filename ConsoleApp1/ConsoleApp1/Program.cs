@@ -1,4 +1,5 @@
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -28,7 +29,7 @@ namespace ConsoleApp1
                 //context.SaveChanges();
 
                 var adults = context.Persons.Where(x=>x.Age >= 18);
-                var adultsInfo = config.CreateMapper().Map<IEnumerable<AdultDto>>(adults);
+                var adultsInfo = adults.ProjectTo<AdultDto>(config).Distinct();
 
 
                 foreach (var a in adultsInfo)
