@@ -16,39 +16,23 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Person, AdultDto>());
-            config.AssertConfigurationIsValid();
 
             using (var context = new MyContext())
             {
-                context.Database.Log = sql => Debug.WriteLine(sql);
 
-                //context.Persons.Add(new Person { Name = "петя", Age = 22 });
-                //context.Persons.Add(new Person { Name = "Вася", Age = 23 });
+                var workers = new Class { Name = "Рабочий класс" };
+                var bourjua = new Class { Name = "Буржуазия" };
 
-                //context.SaveChanges();
+                context.Persons.Add(new Person { Name = "Владимир", Age = 22, Class = workers });
+                context.Persons.Add(new Person { Name = "Карл", Age = 23, Class = workers });
+                context.Persons.Add(new Person { Name = "Морозов", Age = 23, Class = bourjua});
 
-                var adults = context.Persons.Where(x=>x.Age >= 18);
-                var adultsInfo = adults.ProjectTo<AdultDto>(config).Distinct();
+                context.SaveChanges();
 
-
-                foreach (var a in adultsInfo)
-                {
-                    Console.WriteLine($"{a.Name}");
-                }
 
             }
 
 
-            var user = new User
-            {
-                Age = 21,
-                Name = "Алик",
-                Branch = new Branch
-                {
-                    Name = "Подразделение 1"
-                }
-            };
 
             Console.WriteLine("Done!");
             Console.ReadKey();
@@ -62,6 +46,12 @@ namespace ConsoleApp1
 
         public string Name { get; set; }
         public int Age { get; set; }
+        public Class Class { get; set; }
+    }
+
+    public class Class
+    {
+        public string Name { get; set; }
     }
 
 
