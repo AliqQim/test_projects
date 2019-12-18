@@ -29,7 +29,7 @@ namespace ConsoleApp1
 
                 //context.SaveChanges();
 
-                foreach (var item in context.Persons)
+                foreach (var item in context.Persons.ProjectTo<SocietyMemberDto>())
                 {
                     Console.WriteLine($"{item.Name} - {item.Class.Name}");
                 }
@@ -71,4 +71,17 @@ namespace ConsoleApp1
     {
         public string Name { get; set; }
     }
+
+
+    public class SocietyIntermDto
+    {
+
+    }
+
+    public class SocietyMemberDto
+    {
+        public string PersonName { get; set; }
+        public string ClassName { get; set; }
+    }
+
 }
