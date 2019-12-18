@@ -16,20 +16,23 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-
-            using (var context = new MyContext())
+            string dbName = "ConsoleApp1.MyContext1";
+            using (var context = new MyContext($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog={dbName};Integrated Security=True;MultipleActiveResultSets=True"))
             {
 
                 var workers = new Class { Name = "Рабочий класс" };
                 var bourjua = new Class { Name = "Буржуазия" };
 
-                context.Persons.Add(new Person { Name = "Владимир", Age = 22, Class = workers });
-                context.Persons.Add(new Person { Name = "Карл", Age = 23, Class = workers });
-                context.Persons.Add(new Person { Name = "Морозов", Age = 23, Class = bourjua});
+                //context.Persons.Add(new Person { Name = "Владимир", Age = 22, Class = workers });
+                //context.Persons.Add(new Person { Name = "Карл", Age = 23, Class = workers });
+                //context.Persons.Add(new Person { Name = "Морозов", Age = 23, Class = bourjua});
 
-                context.SaveChanges();
+                //context.SaveChanges();
 
-
+                foreach (var item in context.Persons)
+                {
+                    Console.WriteLine($"{item.Name} - {item.Class.Name}");
+                }
             }
 
 
@@ -58,6 +61,9 @@ namespace ConsoleApp1
 
     public class MyContext : DbContext
     {
+        public MyContext(string connectionString)
+            : base(connectionString)
+        { }
         public virtual DbSet<Person> Persons { get; set; }
     }
 
