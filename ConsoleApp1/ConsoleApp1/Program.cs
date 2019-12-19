@@ -14,7 +14,8 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            var user = new User
+            string dbName = "ConsoleApp1.MyContext2";   //когда нужна новая БД - просто имя сменить
+            using (var context = new MyContext($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog={dbName};Integrated Security=True;MultipleActiveResultSets=True"))
             {
                 Age = 21,
                 Name = "Алик",
@@ -52,6 +53,7 @@ namespace ConsoleApp1
 
     public class MyContext : DbContext
     {
+        public MyContext(string connStr) : base(connStr) { }
         public virtual DbSet<Person> Persons { get; set; }
     }
 }
