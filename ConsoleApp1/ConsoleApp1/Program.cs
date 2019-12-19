@@ -61,9 +61,7 @@ namespace ConsoleApp1
 
     public class MyContext : DbContext
     {
-        public MyContext(string connectionString)
-            : base(connectionString)
-        { }
+        public MyContext(string connStr) : base(connStr) { }
         public virtual DbSet<Person> Persons { get; set; }
     }
 
