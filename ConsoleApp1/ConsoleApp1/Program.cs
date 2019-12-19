@@ -13,7 +13,8 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            using (var context = new MyContext())
+            string dbName = "ConsoleApp1.MyContext2";   //когда нужна новая БД - просто имя сменить
+            using (var context = new MyContext($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog={dbName};Integrated Security=True;MultipleActiveResultSets=True"))
             {
                 Console.WriteLine(context.Persons.Count());
 
@@ -50,6 +51,7 @@ namespace ConsoleApp1
 
     public class MyContext : DbContext
     {
+        public MyContext(string connStr) : base(connStr) { }
         public virtual DbSet<Person> Persons { get; set; }
     }
 }
