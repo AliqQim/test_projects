@@ -19,7 +19,8 @@ namespace ConsoleApp1
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Person, AdultDto>());
             config.AssertConfigurationIsValid();
 
-            using (var context = new MyContext())
+            string dbName = "ConsoleApp1.MyContext11";
+            using (var context = new MyContext($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog={dbName};Integrated Security=True;MultipleActiveResultSets=True"))
             {
                 context.Database.Log = sql => Debug.WriteLine(sql);
 
@@ -68,6 +69,7 @@ namespace ConsoleApp1
 
     public class MyContext : DbContext
     {
+        public MyContext(string connStr) : base(connStr) { }
         public virtual DbSet<Person> Persons { get; set; }
     }
 
