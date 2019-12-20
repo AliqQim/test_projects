@@ -29,9 +29,20 @@ namespace ConsoleApp1
 
                 //context.SaveChanges();
 
-                foreach (var item in context.Persons.ProjectTo<SocietyMemberDto>())
+
+                //var config = new MapperConfiguration(cfg => cfg.CreateMap<SocietyIntermDto, SocietyMemberDto>());
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<Person, SocietyMemberDto>()
+                    .ForMember(x=>x.PersonName, x=>x.MapFrom(source => source.Name))
+                );
+                config.AssertConfigurationIsValid();
+
+                IEnumerable<SocietyMemberDto> queryRes = context.Persons
+                    .ProjectTo<SocietyMemberDto>(config);
+                    
+
+                foreach (var item in queryRes)
                 {
-                    Console.WriteLine($"{item.Name} - {item.Class.Name}");
+                    Console.WriteLine($"{item.PersonName} - {item.ClassName}");
                 }
             }
 
@@ -73,7 +84,8 @@ namespace ConsoleApp1
 
     public class SocietyIntermDto
     {
-
+        public Person MyProperty { get; set; }
+        public Class Class { get; set; }
     }
 
     public class SocietyMemberDto
