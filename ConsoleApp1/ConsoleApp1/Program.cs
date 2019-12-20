@@ -20,6 +20,8 @@ namespace ConsoleApp1
             using (var context = new MyContext($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog={dbName};Integrated Security=True;MultipleActiveResultSets=True"))
             {
 
+                context.Database.Log = (sql => Debug.WriteLine(sql));
+
                 var workers = new Class { Name = "Рабочий класс" };
                 var bourjua = new Class { Name = "Буржуазия" };
 
@@ -37,7 +39,8 @@ namespace ConsoleApp1
                 config.AssertConfigurationIsValid();
 
                 IEnumerable<SocietyMemberDto> queryRes = context.Persons
-                    .ProjectTo<SocietyMemberDto>(config);
+                    .ProjectTo<SocietyMemberDto>(config)
+                    .Where(x=>x.ClassName.Contains("Рабочий"));
                     
 
                 foreach (var item in queryRes)
