@@ -14,8 +14,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            string dbName = "ConsoleApp1.MyContext2";   //когда нужна новая БД - просто имя сменить
-            using (var context = new MyContext($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog={dbName};Integrated Security=True;MultipleActiveResultSets=True"))
+            var user = new User
             {
                 Age = 21,
                 Name = "Алик",
