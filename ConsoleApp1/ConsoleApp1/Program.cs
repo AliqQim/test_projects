@@ -13,8 +13,14 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            var config = new MapperConfiguration(cfg => {
+                cfg.AddMaps("Logic");
+                cfg.AddMaps("DAL");
+            });
 
-            var info = new Logic.Logic(null)
+            config.AssertConfigurationIsValid();
+
+            var info = new Logic.Logic(config.CreateMapper())
                 .RequestDataFromLogic(); ;
             foreach (var item in info)
             {

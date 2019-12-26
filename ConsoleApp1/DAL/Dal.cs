@@ -41,4 +41,12 @@ namespace DAL
         public string Name { get; set; }
         public int Count { get; set; }
     }
+
+    public class DalDtoProfile: Profile
+    {
+        public DalDtoProfile()
+        {
+            CreateMap<DalEntity, DalDto>();
+        }
+    }
 }

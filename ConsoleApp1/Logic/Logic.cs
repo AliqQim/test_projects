@@ -30,4 +30,12 @@ namespace Logic
         public string Name { get; set; }
         public int Count { get; set; }
     }
+
+    public class LogicDtoProfile : Profile
+    {
+        public LogicDtoProfile()
+        {
+            CreateMap<DalDto, LogicDto>();
+        }
+    }
 }
