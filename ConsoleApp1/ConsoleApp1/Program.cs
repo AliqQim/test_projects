@@ -14,45 +14,17 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            var user = new User
+            var info = new Logic.Logic(null)
+                .RequestDataFromLogic(); ;
+            foreach (var item in info)
             {
-                Age = 21,
-                Name = "Алик",
-                Branch = new Branch
-                {
-                    Name = "Подразделение 1"
-                }
-            };
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDto>());
-
-            config.AssertConfigurationIsValid();
-
-            var mapper = config.CreateMapper();
-            var dto = mapper.Map<UserDto>(user);
+                Console.WriteLine($"{item.Name} - {item.Count}");
+            }
 
             Console.WriteLine("Done!");
             Console.ReadKey();
         }
     }
 
-    public class Person
-    {
-        [Key]
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-        public int Age { get; set; }
-
-
-
-    }
-
-
-
-    public class MyContext : DbContext
-    {
-        public MyContext(string connStr) : base(connStr) { }
-        public virtual DbSet<Person> Persons { get; set; }
-    }
+    
 }
