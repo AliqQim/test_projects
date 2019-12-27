@@ -10,12 +10,17 @@ namespace ConsoleApp1
     {
         public string Name { get; set; }
         public int Age { get; set; }
-        public Branch Branch { get; set; }
+        
     }
 
-    public class Branch
+    public class MaleUser: User
     {
-        public string Name { get; set; }
+        public string CarName { get; set; }
+    }
+
+    public class FemaleUser : User
+    {
+        public int BoobsSize { get; set; }
     }
 
 
@@ -23,6 +28,15 @@ namespace ConsoleApp1
     {
         public string Name { get; set; }
         public int Age { get; set; }
-        public string BranchName { get; set; }
+    }
+
+    public class MaleUserDto : UserDto
+    {
+        public string CarName { get; set; }
+    }
+
+    public class FemaleUserDto : UserDto
+    {
+        public int BoobsSize { get; set; }
     }
 }

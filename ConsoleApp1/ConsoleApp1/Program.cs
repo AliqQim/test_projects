@@ -14,45 +14,44 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            var user = new User
+            var users = new List<User>
             {
-                Age = 21,
-                Name = "Алик",
-                Branch = new Branch
+                new MaleUser
                 {
-                    Name = "Подразделение 1"
+                    Age = 21,
+                    Name = "Алик",
+                    CarName = "Kyron"
+                },
+                new FemaleUser
+                {
+                    Age = 18,
+                    Name = "Света",
+                    BoobsSize = 4
                 }
             };
 
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDto>());
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<User, UserDto>();
+                cfg.CreateMap<MaleUser, MaleUserDto>()
+                    .IncludeBase<User, UserDto>();
+                cfg.CreateMap<FemaleUser, FemaleUserDto>()
+                    .IncludeBase<User, UserDto>();
+            });
+                
 
             config.AssertConfigurationIsValid();
 
             var mapper = config.CreateMapper();
-            var dto = mapper.Map<UserDto>(user);
+            var dto = mapper.Map<IList<UserDto>>(users);
+
 
             Console.WriteLine("Done!");
             Console.ReadKey();
         }
     }
 
-    public class Person
-    {
-        [Key]
-        public int Id { get; set; }
+    
 
-        public string Name { get; set; }
-        public int Age { get; set; }
-
-
-
-    }
-
-
-
-    public class MyContext : DbContext
-    {
-        public MyContext(string connStr) : base(connStr) { }
-        public virtual DbSet<Person> Persons { get; set; }
-    }
 }
