@@ -1,1 +1,3 @@
-родительская - MVC_TypeScript
+родительские: 
+Mvc_new_proj
+MVC_TypeScript
