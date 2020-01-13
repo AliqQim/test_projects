@@ -27,9 +27,19 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public class AjaxDto
+        {
+            public string Date { get; set; }
+            public int Age { get; set; }
+        }
+
         public JsonResult AjaxAction()
         {
-            return Json(DateTime.Now.ToLongTimeString());
+            return Json(new AjaxDto
+            {
+                Date = DateTime.Now.ToLongDateString(),
+                Age = 222
+            });
         }
     }
 }

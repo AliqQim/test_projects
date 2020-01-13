@@ -6,15 +6,3 @@
 <br/>
 <br />
 <input type="button" value="GO!" onclick="f()" />
-
-<script>
-    function f() {
-        $.ajax({
-            url: "/Home/AjaxAction/",
-            success: function (data) {
-                alert(data);
-            },
-            method: "post"
-        });
-    }
-</script>
