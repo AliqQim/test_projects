@@ -26,5 +26,10 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+
+        public JsonResult AjaxAction()
+        {
+            return Json(DateTime.Now.ToLongTimeString());
+        }
     }
 }
