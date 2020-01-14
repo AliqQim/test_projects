@@ -1,16 +1,11 @@
 ﻿
 declare let $;
 
-export class AjaxDto {
-    public Date: string;
-    public Age: number;
-}
-
 function f() {
     $.ajax({
         url: "/Home/AjaxAction/",
-        success: function (data: AjaxDto) {
-            alert(`Age -  ${data.Age}, ${data.Date}`);
+        success: function (data: WebApplication1.Controllers.HomeController.AjaxDto) {
+            alert(`Age -  ${data.Ago}, ${data.Date}`);
         },
         method: "post"
     });
