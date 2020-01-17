@@ -212,6 +212,14 @@
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
+    <T4ParameterValues Include="TargetDir">
+      <Value>$(TargetDir)</Value>
+    </T4ParameterValues>
+	<T4ParameterValues Include="TargetFileName">
+      <Value>$(TargetFileName)</Value>
+    </T4ParameterValues>
+  </ItemGroup>
+  <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
@@ -227,6 +235,8 @@
   <PropertyGroup>
     <TransformOnBuild>true</TransformOnBuild>
     <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
+	<TargetDir>$(TargetDir)</TargetDir>
+	<TargetFileName>$(TargetFileName)</TargetFileName>
   </PropertyGroup>
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />

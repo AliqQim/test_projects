@@ -7,7 +7,7 @@
 <#@ import namespace="TypeLite.Net4" #> 
 <#@output extension=".d.ts"#>
 
- <#@include file="$(ProjectDir)\Scripts\Manager.ttinclude"#>
+ <#@include file="Manager.ttinclude"#>
 <# var manager = Manager.Create(Host, GenerationEnvironment); #>
 
 <# var ts = TypeScript.Definitions()
