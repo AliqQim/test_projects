@@ -1,3 +1,1 @@
-родительские: 
-Mvc_new_proj
-MVC_TypeScript
+родительская: TypeScript_DTO__TypeLite_Manual
