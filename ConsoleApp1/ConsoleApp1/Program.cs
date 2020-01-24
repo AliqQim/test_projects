@@ -13,13 +13,13 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
 
-            string dbName = "ConsoleApp1.MyContext2";   //РєРѕРіРґР° РЅСѓР¶РЅР° РЅРѕРІР°СЏ Р‘Р” - РїСЂРѕСЃС‚Рѕ РёРјСЏ СЃРјРµРЅРёС‚СЊ
+            string dbName = "ConsoleApp1.MyContext2";   //когда нужна новая БД - просто имя сменить
             using (var context = new MyContext($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog={dbName};Integrated Security=True;MultipleActiveResultSets=True"))
             {
                 Console.WriteLine(context.Persons.Count());
 
-                //context.Persons.Add(new Person { Name = "РїРµС‚СЏ", Age = 22 });
-                //context.Persons.Add(new Person { Name = "Р’Р°СЃСЏ", Age = 23 });
+                //context.Persons.Add(new Person { Name = "петя", Age = 22 });
+                //context.Persons.Add(new Person { Name = "Вася", Age = 23 });
 
                 //context.SaveChanges();
 
