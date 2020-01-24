@@ -44,10 +44,10 @@ namespace ConsoleApp1
             var user = new User
             {
                 Age = 21,
-                Name = "РђР»РёРє",
+                Name = "Алик",
                 Branch = new Branch
                 {
-                    Name = "РџРѕРґСЂР°Р·РґРµР»РµРЅРёРµ 1"
+                    Name = "Подразделение 1"
                 }
             };
 
