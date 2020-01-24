@@ -15,9 +15,10 @@ namespace ConsoleApp1
             {
                 var a = container.Resolve<A>();
 
-                Console.WriteLine("DONE");
-                Console.ReadKey();
             }
+
+            Console.WriteLine("DONE");
+            Console.ReadKey();
         }
 
         class A { };
