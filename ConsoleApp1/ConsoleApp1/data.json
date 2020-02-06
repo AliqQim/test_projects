@@ -1,0 +1,863 @@
+﻿{
+  "_shards": {
+    "total": 592,
+    "successful": 590,
+    "failed": 0
+  },
+  "_all": {
+    "primaries": {
+      "store": {
+        "size_in_bytes": 30488962575,
+        "throttle_time_in_millis": 0
+      }
+    },
+    "total": {
+      "store": {
+        "size_in_bytes": 60963215793,
+        "throttle_time_in_millis": 0
+      }
+    }
+  },
+  "indices": {
+    ".elastichq": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 6870,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 13740,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-15": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1555146123,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 3108133358,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-16": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1263775663,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2526996622,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-17": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1115398200,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2232519154,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-18": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 565351150,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 1133035736,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-11": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1159527528,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2320997556,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-12": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 436905220,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 872886297,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-13": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1596458905,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 3192917805,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-14": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1592606840,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 3169388280,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-10": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1596678758,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 3199439133,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-02-01": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 3825391,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 7691345,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-02-02": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 3702362,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 7279832,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-31": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4573449,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 9116282,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-30": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4271924,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 8887279,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-02-05": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 5916986,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 11656082,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-02-06": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4160986,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 8932754,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-02-03": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 5465870,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 10905820,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-02-04": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 5905842,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 11878781,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-22": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 5430826,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 10790612,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-23": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 5336219,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 10783309,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-20": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 6147772,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 12348604,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-21": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 5661540,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 11183080,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-28": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4616406,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 9269793,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-29": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 5264908,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 10646858,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-26": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 3762713,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 7542998,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-27": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4837605,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 9724883,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-24": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4514200,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 9070108,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-25": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4308275,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 8555642,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-02-05": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1888876581,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 3775690583,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-02-06": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 514637361,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 1029508658,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-02-01": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 814371474,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 1629934595,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    ".kibana": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 37693,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 75386,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-02-02": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 588283865,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 1175921245,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-02-03": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1246438376,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2489542596,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-02-04": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1177125743,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2353911235,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-30": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1110283914,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2222323197,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-31": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 958900636,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 1914550361,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "logstash-kaspiguide_first": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4918359,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 9852161,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspi_guide_first": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 2878382,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 4649576,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-11": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4768561,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 9435580,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-12": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4241816,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 8262180,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-10": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 5316498,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 10570652,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-19": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4246269,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 8571059,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-17": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 5255875,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 10512053,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-18": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4182339,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 8433746,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-15": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 8319998,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 16513515,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-19": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 547842133,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 1095527165,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-16": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 4987367,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 10084646,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-13": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 5542652,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 11085299,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_error_2020-01-14": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 9681764,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 19199826,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-26": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 587974483,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 1175730661,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-27": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1230541648,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2463857545,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-28": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1222840555,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2441729374,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-29": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1168906446,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2339876969,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-22": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1223633601,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2445658346,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-23": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 997100704,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 1993644624,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-24": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1363525408,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2724758886,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-25": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 627676349,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 1256087487,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-20": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1005824238,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2013316739,
+          "throttle_time_in_millis": 0
+        }
+      }
+    },
+    "kaspiguide_log_info_2020-01-21": {
+      "primaries": {
+        "store": {
+          "size_in_bytes": 1180242956,
+          "throttle_time_in_millis": 0
+        }
+      },
+      "total": {
+        "store": {
+          "size_in_bytes": 2361808105,
+          "throttle_time_in_millis": 0
+        }
+      }
+    }
+  }
+}
