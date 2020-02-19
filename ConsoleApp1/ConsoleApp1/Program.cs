@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity;
+using Unity.Lifetime;
 
 namespace ConsoleApp1
 {
@@ -13,7 +14,16 @@ namespace ConsoleApp1
         {
             using (var container = new UnityContainer())
             {
-                var a = container.Resolve<A>();
+                container.RegisterType<I1, A>(new ContainerControlledLifetimeManager());
+                container.RegisterFactory<I2>((cont) => cont.Resolve<I1>());
+
+
+                container.Resolve<I1>();
+                container.Resolve<I2>();
+
+
+
+
 
             }
 
@@ -21,6 +31,29 @@ namespace ConsoleApp1
             Console.ReadKey();
         }
 
-        class A { };
+
+        interface I1 { };
+        interface I2 { };
+
+        static class Ctr
+        {
+            static int _ctr = 0;
+            public static int Next() => _ctr++;
+        }
+        class A : IDisposable, I1, I2
+        {
+            public int _id;
+
+            public A()
+            {
+                _id = Ctr.Next();
+                Console.WriteLine($"A({_id})");
+            }
+
+            public void Dispose()
+            {
+                Console.WriteLine($"~A({_id})");
+            }
+        };
     }
 }
