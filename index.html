@@ -35,7 +35,14 @@
         });
 
         function btnClick() {
-            alert(111);
+            var checked_ids = [];
+            var returnChildCheckedNodesAlso = true; //By default these functions return only top level checked/unchecked nodes
+            var elements = $("#jstree").jstree("get_checked", null, true)
+            $.each(elements, function () {
+                checked_ids.push(this);
+            });
+
+            alert(checked_ids.join(", "));
         }
 
     </script>
