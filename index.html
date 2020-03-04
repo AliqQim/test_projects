@@ -5,13 +5,19 @@
     <link href="jstree/themes/default/style.css" rel="stylesheet" />
 </head>
 <body>
+    <div>
+        <a href="#" onclick="btnClick()" title="кнопко">кнопко</a>
+    </div>
     <div id="jstree" />
+
+    
+           
 
     <script>
         $(function () {
             $('#jstree').jstree({
                 'plugins': ["wholerow", "checkbox"],
-                 'core': {
+                'core': {
                     'data': [
                         {
                             "text": "Same but with checkboxes",
@@ -27,6 +33,12 @@
                 }
             });
         });
+
+        function btnClick() {
+            alert(111);
+        }
+
     </script>
+
 </body>
 </html>
