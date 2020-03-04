@@ -5,24 +5,27 @@
     <link href="jstree/themes/default/style.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="jstree">
-        <!-- in this example the tree is populated from inline HTML -->
-        <ul>
-            <li>
-                Root node 1
-                <ul>
-                    <li id="child_node_1">Child node 1</li>
-                    <li>Child node 2</li>
-                </ul>
-            </li>
-            <li>Root node 2</li>
-        </ul>
-    </div>
+    <div id="jstree" />
 
     <script>
         $(function () {
-            // 6 create an instance when the DOM is ready
-            $('#jstree').jstree();
+            $('#jstree').jstree({
+                'plugins': ["wholerow", "checkbox"],
+                 'core': {
+                    'data': [
+                        {
+                            "text": "Same but with checkboxes",
+                            "children": [
+                                { "text": "initially selected", "state": { "selected": true } },
+                                { "text": "custom icon URL", "icon": "//jstree.com/tree-icon.png" },
+                                { "text": "initially open", "state": { "opened": true }, "children": ["Another node"] },
+                                { "text": "custom icon class", "icon": "glyphicon glyphicon-leaf" }
+                            ]
+                        },
+                        "And wholerow selection"
+                    ]
+                }
+            });
         });
     </script>
 </body>
