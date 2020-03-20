@@ -6,9 +6,9 @@
 
 /// <reference path="Enums.ts" />
 
-declare namespace WebApplication1.Controllers.HomeController {
+declare namespace amoduleaaWebApplication1.Controllers.HomeControllerqqq {
 	interface AjaxDto {
-		Ago: number;
+		Age: number;
 		Date: string;
 	}
 }
