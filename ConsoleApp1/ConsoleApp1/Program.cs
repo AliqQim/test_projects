@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity;
 using Unity.Injection;
+using Unity.Lifetime;
 using Unity.Resolution;
 
 namespace ConsoleApp1
@@ -18,6 +19,7 @@ namespace ConsoleApp1
                 container.EnableDebugDiagnostic();
 
                 container.RegisterType<I, C1>();
+                container.RegisterType<C2>(new PerResolveLifetimeManager());
 
                 container.Resolve<A>().f();
                 container.Resolve<A>(
@@ -35,7 +37,7 @@ namespace ConsoleApp1
         class A {
             private readonly B b;
 
-            public A(B b)
+            public A(B b, D d)
             {
                 this.b = b;
             }
@@ -59,6 +61,10 @@ namespace ConsoleApp1
         };
         class C1 : I
         {
+            public C1()
+            {
+                Console.WriteLine("конструктор C1");
+            }
             public void SayMyName()
             {
                 Console.WriteLine("C1");
@@ -66,9 +72,21 @@ namespace ConsoleApp1
         }
         class C2 : I
         {
+            public C2()
+            {
+                Console.WriteLine("конструктор C2");
+            }
             public void SayMyName()
             {
                 Console.WriteLine("C2");
+            }
+        }
+
+        class D
+        {
+            public D(I i)
+            {
+                //убеждаемся, что инстанцирование I следует логике, зарегистрированной в контейнере
             }
         }
     }
