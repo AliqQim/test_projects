@@ -8,8 +8,9 @@ namespace CoreConsoleApp
     {
         static void Main(string[] args)
         {
-            //var options = new new DbContextOptionsBuilder<MyContext>()
-            //    .UseSql
+            string dbName = "ConsoleApp1.MyContext2";   //когда нужна новая БД - просто имя сменить
+            var options = new DbContextOptionsBuilder<MyContext>()
+                .UseSqlServer($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog={dbName};Integrated Security=True;MultipleActiveResultSets=True");
 
             Console.WriteLine("DONE");
         }
