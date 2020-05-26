@@ -1,0 +1,16 @@
+﻿{
+  "header": {
+    "status": "OK",
+    "message": null
+  },
+  "response": {
+    "signType": {
+      "cert": {
+        "code": "guide_electronic_digital_signature",
+        "name": "Регистрационное свидетельство на бумажном носителе и (или) в форме электронного документа",
+        "file": "guide_electronic_digital_signature-40f6a837-9fdb-4859-a69d-edc1602411dc_docx.pdf",
+        "body": "JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBvYmoKPDwvTGVuZ3RoIDMgMCBSL0ZpbHRlci9GbGF0ZURlY29kZT4"
+      }
+    }
+  }
+}

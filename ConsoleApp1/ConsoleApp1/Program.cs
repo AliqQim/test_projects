@@ -28,6 +28,13 @@ namespace ConsoleApp1
                 Console.WriteLine($"{title}\t\t\t{ size }");
             }
 
+            JObject o2 = JObject.Parse(File.ReadAllText("data2.json"));
+
+            Console.WriteLine("*********пример №2");
+            Console.WriteLine(o2.SelectToken("header.status"));
+            Console.WriteLine(o2.SelectToken("response.signType.cert.body"));
+            Console.WriteLine(o2.SelectToken("response.signType.cert.bodY"));
+            Console.WriteLine(o2.SelectToken("response.signType.cert.bodY", true));
 
             Console.WriteLine("DONE");
             Console.ReadKey();

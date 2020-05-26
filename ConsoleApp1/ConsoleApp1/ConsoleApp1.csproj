@@ -50,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="data2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="data.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
