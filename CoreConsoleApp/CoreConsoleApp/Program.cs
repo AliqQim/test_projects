@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -16,13 +17,26 @@ namespace CoreConsoleApp
 
             using (var context = new MyContext(options))
             {
+
                 //context.Database.EnsureDeleted();
+
                 context.Database.EnsureCreated();
 
                 Console.WriteLine(context.Persons.Count());
 
-                //context.Persons.Add(new Person { Name = "петя", Age = 22 });
-                //context.Persons.Add(new Person { Name = "Вася", Age = 23 });
+                
+                //context.Persons.Add(new Person { Name = "петя", Age = 22,
+                //    Job = new Job { Name = "работа 1"},
+                //    Zamorochkas = new List<Zamorochka> { 
+                //        new Zamorochka { Name = "тупо шутит" },
+                //        new Zamorochka { Name = "безалаберный" },
+                //    }
+                
+                //});
+                //context.Persons.Add(new Person { Name = "Вася", Age = 23 ,
+                //    Job = new Job { Name = "работа 2"},
+                //    Zamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич"} }
+                //    });
 
                 //context.SaveChanges();
 
@@ -30,6 +44,11 @@ namespace CoreConsoleApp
                 {
                     Console.WriteLine($"{p.Name} {p.Age}");
                 }
+
+                var persons = context.Persons.ToArray();
+
+                string firstzamorochkaNmae = persons.First().Zamorochkas?.First()?.Name;
+                    
 
             }
 
@@ -45,8 +64,24 @@ namespace CoreConsoleApp
         public string Name { get; set; } = null!;
         public int Age { get; set; }
 
+        public List<Zamorochka> Zamorochkas { get; set; } = null!;
 
+        public Job Job { get; set; } = null!;
 
+    }
+
+    public class Zamorochka
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+    }
+
+    public class Job
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
     }
 
 
