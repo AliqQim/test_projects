@@ -37,6 +37,13 @@ namespace WebAPI.Core.Controllers
         }
 
 
+        /// <summary>
+        /// вычисление среднего значения. при чем тут температура? 
+        /// ну это же <see cref="WeatherForecastController"/>
+        /// </summary>
+        /// <param name="value1">первое значение температуры</param>
+        /// <param name="value2">второе значение температуры</param>
+        /// <returns>среднее арифметическое двух значений</returns>
         [HttpPost]
         public double GetAverageTemperatures(double value1, double value2)
         {
