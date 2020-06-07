@@ -44,6 +44,7 @@ namespace WebAPI.Core.Controllers
         /// <param name="value1">первое значение температуры</param>
         /// <param name="value2">второе значение температуры</param>
         /// <returns>среднее арифметическое двух значений</returns>
+        /// <remarks>я тебе еще раз говорю: вычисление среднего значения!</remarks>
         [HttpPost]
         public double GetAverageTemperatures(double value1, double value2)
         {
