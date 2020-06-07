@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -50,5 +51,25 @@ namespace WebAPI.Core.Controllers
         {
             return (value1 + value2) / 2;
         }
+
+
+        public class Person
+        {
+            public string Name { get; set; } = null!;
+            public string? LastName { get; set; }
+
+            [Range(0, 120)]
+            public int Age { get; set; }
+
+            public bool IsFemale { get; set; }
+
+        }
+
+        [HttpPost]
+        public bool IsAvailableForChattingUp(Person person)
+        {
+            return person.IsFemale && person.Age >= 18 && person.Age <= 45;
+        }
+
     }
 }
