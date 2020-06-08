@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -52,20 +53,36 @@ namespace WebAPI.Core.Controllers
             return (value1 + value2) / 2;
         }
 
-
+        /// <summary>
+        /// особа для проверки
+        /// </summary>
         public class Person
         {
+            /// <summary>
+            /// имя особы
+            /// </summary>
             public string Name { get; set; } = null!;
             public string? LastName { get; set; }
 
+            /// <summary>
+            /// возраст особы
+            /// </summary>
             [Range(0, 120)]
             public int Age { get; set; }
 
+            /// <summary>
+            /// пол особы
+            /// </summary>
             public bool IsFemale { get; set; }
 
         }
 
-        [HttpPost]
+        /// <summary>
+        /// проверяем, является ли особа годной телочкой. см. <see cref="Person"/>
+        /// </summary>
+        /// <param name="person"></param>
+        /// <returns></returns>
+        [HttpPost(nameof(IsAvailableForChattingUp))]
         public bool IsAvailableForChattingUp(Person person)
         {
             return person.IsFemale && person.Age >= 18 && person.Age <= 45;
