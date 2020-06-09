@@ -1,1 +1,4 @@
-родительская - WebAPI_Core
+родительская - Swagger
+
+/swagger
+
