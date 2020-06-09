@@ -5,3 +5,6 @@
 
 /swagger/v1/swagger.json
 /swagger
+
+
+эмм, по ходу, Swashbuckle только добавляет поддержку Swagger, но не умеет с клиентской стороны прокси мутить
