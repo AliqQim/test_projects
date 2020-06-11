@@ -97,7 +97,7 @@
         }
       }
     },
-    "/WeatherForecast/IsAvailableForChattingUp": {
+    "/WeatherForecast/IsAvailableForChattingUpChick": {
       "post": {
         "tags": [
           "WeatherForecast"

@@ -82,8 +82,8 @@ namespace WebAPI.Core.Controllers
         /// </summary>
         /// <param name="person"></param>
         /// <returns></returns>
-        [HttpPost(nameof(IsAvailableForChattingUp))]
-        public bool IsAvailableForChattingUp(Person person)
+        [HttpPost(nameof(IsAvailableForChattingUpChick))]
+        public bool IsAvailableForChattingUpChick(Person person)
         {
             return person.IsFemale && person.Age >= 18 && person.Age <= 45;
         }
