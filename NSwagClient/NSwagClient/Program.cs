@@ -15,6 +15,13 @@ namespace NSwagClient
 
             Console.WriteLine("обращаемся к сервису...");
             Console.WriteLine(await client.WeatherForecastAsync(1, 2));
+            Console.WriteLine(await client.IsAvailableForChattingUpAsync(
+                new Person
+                {
+                    Age = 88,
+                    IsFemale = false,
+                    Name = "Сидор"
+                }));
 
 
             Console.WriteLine("Hello World!");
