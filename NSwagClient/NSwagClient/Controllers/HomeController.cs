@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,8 +19,18 @@ namespace NSwagClient.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        async public Task<IActionResult> Index()
         {
+            using (var httpClient = new System.Net.Http.HttpClient())
+            {
+                var serviceWrapper = new MyTestServiceName.Client(
+                    "https://localhost:44354",
+                    httpClient);
+
+                double res = await serviceWrapper.WeatherforecastPostAsync(1, 2);
+                ViewBag.Output = $"среднее арифметическое от 1 и 2: {res}";
+            }
+
             return View();
         }
 
