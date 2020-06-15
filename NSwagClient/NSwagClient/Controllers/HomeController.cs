@@ -27,8 +27,21 @@ namespace NSwagClient.Controllers
                     "https://localhost:44354",
                     httpClient);
 
-                double res = await serviceWrapper.WeatherforecastPostAsync(1, 2);
-                ViewBag.Output = $"среднее арифметическое от 1 и 2: {res}";
+                double resAvg = await serviceWrapper.WeatherforecastPostAsync(1, 2);
+                ViewBag.Output = $"среднее арифметическое от 1 и 2: {resAvg}; ";
+
+
+                bool resChick = await serviceWrapper.WeatherforecastIsavailableforchattingupAsync(
+                    new MyTestServiceName.Person
+                    {
+                        Age = 25,
+                        IsFemale = true,
+                        Name = "Света"
+                    });
+
+                ViewBag.Output += $"подкатывать ли к Свете: {resChick}; ";
+
+
             }
 
             return View();
