@@ -2,5 +2,6 @@
 
 function DoIt() {
     var client = new MyTestServiceName.Client("https://localhost:44354/");
-    var res = client.weatherForecast(3, 4);
+    client.weatherForecast(3, 4)
+        .then((res: number)=> alert(res));
 }
