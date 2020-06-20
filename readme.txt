@@ -1,10 +1,8 @@
-родительская - Swagger
+родительская - Swagger_UnchaseClient
 
-делаем на основе https://docs.microsoft.com/ru-ru/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+в предыдущем коммите мы сделали, чтоб статические файлы выдавались не только из wwwroot
 
+https://metanit.com/sharp/aspnet5/2.5.php
 
-/swagger/v1/swagger.json
-/swagger
-
-
-эмм, по ходу, Swashbuckle только добавляет поддержку Swagger, но не умеет с клиентской стороны прокси мутить
+по-хорошему, нужно еще сделать, чтоб из этой второй папки выдавались только .js-файлы.
+думаю, добиться этого можно через второй параметр конструктора PhysicalFileProvider (так что-то про фильтры)
