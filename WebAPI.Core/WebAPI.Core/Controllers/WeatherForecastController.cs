@@ -48,7 +48,7 @@ namespace WebAPI.Core.Controllers
         /// <returns>среднее арифметическое двух значений</returns>
         /// <remarks>я тебе еще раз говорю: вычисление среднего значения!</remarks>
         [HttpPost]
-        public double GetAverageTemperatures(double value1, double value2)
+        public double GetAverageTemperatures([Required]double value1, double value2)
         {
             return (value1 + value2) / 2;
         }

@@ -63,15 +63,15 @@ export class Client {
     /**
      * вычисление среднего значения. при чем тут температура? 
     ну это же WebAPI.Core.Controllers.WeatherForecastController
-     * @param value1 (optional) первое значение температуры
+     * @param value1 первое значение температуры
      * @param value2 (optional) второе значение температуры
      * @return Success
      */
-    weatherForecast(value1: number | undefined, value2: number | undefined): Promise<number> {
+    weatherForecast(value1: number, value2: number | undefined): Promise<number> {
         let url_ = this.baseUrl + "/WeatherForecast?";
-        if (value1 === null)
-            throw new Error("The parameter 'value1' cannot be null.");
-        else if (value1 !== undefined)
+        if (value1 === undefined || value1 === null)
+            throw new Error("The parameter 'value1' must be defined and cannot be null.");
+        else
             url_ += "value1=" + encodeURIComponent("" + value1) + "&";
         if (value2 === null)
             throw new Error("The parameter 'value2' cannot be null.");

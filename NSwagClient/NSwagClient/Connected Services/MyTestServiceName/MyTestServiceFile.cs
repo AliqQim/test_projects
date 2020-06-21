@@ -121,7 +121,7 @@ namespace NSwagClient.MyTestServiceName
         /// <param name="value2">второе значение температуры</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<double> WeatherforecastPostAsync(double? value1, double? value2)
+        public System.Threading.Tasks.Task<double> WeatherforecastPostAsync(double value1, double? value2)
         {
             return WeatherforecastPostAsync(value1, value2, System.Threading.CancellationToken.None);
         }
@@ -133,14 +133,14 @@ namespace NSwagClient.MyTestServiceName
         /// <param name="value2">второе значение температуры</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<double> WeatherforecastPostAsync(double? value1, double? value2, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<double> WeatherforecastPostAsync(double value1, double? value2, System.Threading.CancellationToken cancellationToken)
         {
+            if (value1 == null)
+                throw new System.ArgumentNullException("value1");
+    
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/WeatherForecast?");
-            if (value1 != null) 
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("value1") + "=").Append(System.Uri.EscapeDataString(ConvertToString(value1, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
+            urlBuilder_.Append(System.Uri.EscapeDataString("value1") + "=").Append(System.Uri.EscapeDataString(ConvertToString(value1, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             if (value2 != null) 
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("value2") + "=").Append(System.Uri.EscapeDataString(ConvertToString(value2, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
