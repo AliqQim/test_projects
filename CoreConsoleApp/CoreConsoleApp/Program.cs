@@ -10,7 +10,7 @@ namespace CoreConsoleApp
     {
         static void Main(string[] args)
         {
-            string dbName = "MyContext";   //когда нужна новая БД - просто имя сменить
+            string dbName = $"MyContext{DateTime.Today:yyyyMMdd}";
             var options = new DbContextOptionsBuilder<MyContext>()
                 .UseSqlServer($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog={dbName};Integrated Security=True;MultipleActiveResultSets=True")
                 .Options;
