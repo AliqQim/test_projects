@@ -10,35 +10,46 @@ namespace CoreConsoleApp
     {
         static void Main(string[] args)
         {
-            string dbName = $"MyContext{DateTime.Today:yyyyMMdd}";
             var options = new DbContextOptionsBuilder<MyContext>()
-                .UseSqlServer($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog={dbName};Integrated Security=True;MultipleActiveResultSets=True")
+                .UseSqlServer($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog=MyContext;Integrated Security=True;MultipleActiveResultSets=True")
                 .Options;
 
             using (var context = new MyContext(options))
             {
+                bool reset = true;
 
-                //context.Database.EnsureDeleted();
+                if (reset)
+                {
+                    context.Database.EnsureDeleted();
+                    context.Database.EnsureCreated();
 
-                context.Database.EnsureCreated();
+                    context.Persons.Add(new Person
+                    {
+                        Name = "петя",
+                        Age = 22,
+                        Job = new Job { Name = "работа 1" },
+                        Zamorochkas = new List<Zamorochka> {
+                            new Zamorochka { Name = "тупо шутит" },
+                            new Zamorochka { Name = "безалаберный" },
+                        }
+
+                    });
+                    context.Persons.Add(new Person
+                    {
+                        Name = "Вася",
+                        Age = 23,
+                        Job = new Job { Name = "работа 2" },
+                        Zamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич" } }
+                    });
+
+                    context.SaveChanges();
+                }
+                                
 
                 Console.WriteLine(context.Persons.Count());
 
                 
-                //context.Persons.Add(new Person { Name = "петя", Age = 22,
-                //    Job = new Job { Name = "работа 1"},
-                //    Zamorochkas = new List<Zamorochka> { 
-                //        new Zamorochka { Name = "тупо шутит" },
-                //        new Zamorochka { Name = "безалаберный" },
-                //    }
                 
-                //});
-                //context.Persons.Add(new Person { Name = "Вася", Age = 23 ,
-                //    Job = new Job { Name = "работа 2"},
-                //    Zamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич"} }
-                //    });
-
-                //context.SaveChanges();
 
                 foreach (var p in context.Persons)
                 {
@@ -47,7 +58,8 @@ namespace CoreConsoleApp
 
                 var persons = context.Persons.ToArray();
 
-                string firstzamorochkaNmae = persons.First().Zamorochkas?.First()?.Name;
+                string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
+                Console.WriteLine(firstzamorochkaName);
                     
 
             }
