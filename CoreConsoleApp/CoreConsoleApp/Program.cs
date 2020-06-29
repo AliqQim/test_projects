@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,60 +11,62 @@ namespace CoreConsoleApp
     {
         static void Main(string[] args)
         {
-            var options = new DbContextOptionsBuilder<MyContext>()
-                .UseSqlServer($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog=MyContext;Integrated Security=True;MultipleActiveResultSets=True")
-                .Options;
-
-            using (var context = new MyContext(options))
+            using (var connection = new SqliteConnection("Filename=:memory:"))
             {
-                bool reset = true;
+                var options = new DbContextOptionsBuilder<MyContext>()
+                    .UseSqlite(connection)
+                    .Options;
 
-                if (reset)
+                using (var context = new MyContext(options))
                 {
-                    context.Database.EnsureDeleted();
-                    context.Database.EnsureCreated();
+                    bool reset = true;
 
-                    context.Persons.Add(new Person
+                    if (reset)
                     {
-                        Name = "петя",
-                        Age = 22,
-                        Job = new Job { Name = "работа 1" },
-                        Zamorochkas = new List<Zamorochka> {
+                        context.Database.EnsureDeleted();
+                        context.Database.EnsureCreated();
+
+                        context.Persons.Add(new Person
+                        {
+                            Name = "петя",
+                            Age = 22,
+                            Job = new Job { Name = "работа 1" },
+                            Zamorochkas = new List<Zamorochka> {
                             new Zamorochka { Name = "тупо шутит" },
                             new Zamorochka { Name = "безалаберный" },
                         }
 
-                    });
-                    context.Persons.Add(new Person
+                        });
+                        context.Persons.Add(new Person
+                        {
+                            Name = "Вася",
+                            Age = 23,
+                            Job = new Job { Name = "работа 2" },
+                            Zamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич" } }
+                        });
+
+                        context.SaveChanges();
+                    }
+
+
+                    Console.WriteLine(context.Persons.Count());
+
+
+
+
+                    foreach (var p in context.Persons)
                     {
-                        Name = "Вася",
-                        Age = 23,
-                        Job = new Job { Name = "работа 2" },
-                        Zamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич" } }
-                    });
+                        Console.WriteLine($"{p.Name} {p.Age}");
+                    }
 
-                    context.SaveChanges();
+                    var persons = context.Persons.ToArray();
+
+                    string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
+                    Console.WriteLine(firstzamorochkaName);
+
+
                 }
-                                
-
-                Console.WriteLine(context.Persons.Count());
-
-                
-                
-
-                foreach (var p in context.Persons)
-                {
-                    Console.WriteLine($"{p.Name} {p.Age}");
-                }
-
-                var persons = context.Persons.ToArray();
-
-                string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
-                Console.WriteLine(firstzamorochkaName);
-                    
-
             }
-
             Console.WriteLine("Done!");
         }
     }
