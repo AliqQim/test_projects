@@ -61,7 +61,7 @@ namespace CoreConsoleApp
                         Console.WriteLine($"{p.Name} {p.Age}");
                     }
 
-                    var persons = context.Persons.ToArray();
+                    var persons = context.Persons.Include(x=>x.Zamorochkas);
 
                     string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
                     Console.WriteLine(firstzamorochkaName);
