@@ -13,45 +13,47 @@ namespace CoreConsoleApp
         {
             using (var connection = new SqliteConnection("Filename=:memory:"))
             {
+                connection.Open();
+
                 var options = new DbContextOptionsBuilder<MyContext>()
                     .UseSqlite(connection)
                     .Options;
 
                 using (var context = new MyContext(options))
                 {
-                    bool reset = true;
 
-                    if (reset)
+
+
+
+                    context.Database.EnsureDeleted();
+                    context.Database.EnsureCreated();
+
+                    context.Persons.Add(new Person
                     {
-                        context.Database.EnsureDeleted();
-                        context.Database.EnsureCreated();
-
-                        context.Persons.Add(new Person
-                        {
-                            Name = "петя",
-                            Age = 22,
-                            Job = new Job { Name = "работа 1" },
-                            Zamorochkas = new List<Zamorochka> {
+                        Name = "петя",
+                        Age = 22,
+                        Job = new Job { Name = "работа 1" },
+                        Zamorochkas = new List<Zamorochka> {
                             new Zamorochka { Name = "тупо шутит" },
                             new Zamorochka { Name = "безалаберный" },
                         }
 
-                        });
-                        context.Persons.Add(new Person
-                        {
-                            Name = "Вася",
-                            Age = 23,
-                            Job = new Job { Name = "работа 2" },
-                            Zamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич" } }
-                        });
+                    });
+                    context.Persons.Add(new Person
+                    {
+                        Name = "Вася",
+                        Age = 23,
+                        Job = new Job { Name = "работа 2" },
+                        Zamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич" } }
+                    });
 
-                        context.SaveChanges();
-                    }
+                    context.SaveChanges();
+                }
+
+                using (var context = new MyContext(options)) { 
 
 
                     Console.WriteLine(context.Persons.Count());
-
-
 
 
                     foreach (var p in context.Persons)
@@ -63,7 +65,6 @@ namespace CoreConsoleApp
 
                     string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
                     Console.WriteLine(firstzamorochkaName);
-
 
                 }
             }
