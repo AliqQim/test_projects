@@ -24,7 +24,6 @@ namespace CoreConsoleApp
 
 
 
-
                     context.Database.EnsureDeleted();
                     context.Database.EnsureCreated();
 
@@ -66,7 +65,30 @@ namespace CoreConsoleApp
                     string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
                     Console.WriteLine(firstzamorochkaName);
 
+
+                    Console.WriteLine("Количество персон в первом контексте: " +
+                            context.Persons.Count());
+
+                    //убеждаемся, что контекст использует коннекшен, заложенный в опции
+                    using (var connection2 = new SqliteConnection("Filename=:memory:"))
+                    {
+                        connection2.Open();
+
+                        var options2 = new DbContextOptionsBuilder<MyContext>()
+                        .UseSqlite(connection2)
+                        .Options;
+
+                        using (var context2 = new MyContext(options2))
+                        {
+                            context2.Database.EnsureCreated();
+                            Console.WriteLine("Количество персон во втором контексте: " +
+                                context2.Persons.Count());
+
+                        }
+                    }
+
                 }
+
             }
             Console.WriteLine("Done!");
         }
