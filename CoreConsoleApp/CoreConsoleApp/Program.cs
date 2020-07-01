@@ -18,16 +18,16 @@ namespace CoreConsoleApp
                 var options = new DbContextOptionsBuilder<MyContext>()
                     .UseSqlite(connection)
                     .Options;
+                
+                int petyaId;
+                Person newPetya;
 
                 using (var context = new MyContext(options))
                 {
-
-
-
                     context.Database.EnsureDeleted();
                     context.Database.EnsureCreated();
 
-                    context.Persons.Add(new Person
+                    newPetya = new Person
                     {
                         Name = "петя",
                         Age = 22,
@@ -37,7 +37,9 @@ namespace CoreConsoleApp
                             new Zamorochka { Name = "безалаберный" },
                         }
 
-                    });
+                    };
+
+                    context.Persons.Add(newPetya);
                     context.Persons.Add(new Person
                     {
                         Name = "Вася",
@@ -47,9 +49,16 @@ namespace CoreConsoleApp
                     });
 
                     context.SaveChanges();
+
+                    petyaId = newPetya.Id;
                 }
 
-                using (var context = new MyContext(options)) { 
+                using (var context = new MyContext(options)) {
+
+                    var selectedPetya = context.Persons.Find(petyaId);
+
+                    if (!object.ReferenceEquals(selectedPetya, newPetya))
+                        Console.WriteLine("они разные");
 
 
                     Console.WriteLine(context.Persons.Count());
