@@ -10,22 +10,19 @@ namespace CoreConsoleApp
             var services = new ServiceCollection();
             services.AddScoped<A>();
             services.AddScoped<B>();
-            services.AddScoped<C>();
+
 
             Console.WriteLine("Creating global");
             using var globalProvider = services.BuildServiceProvider();
-            globalProvider.GetService<A>();
+            globalProvider.GetService<B>();
 
-            Console.WriteLine("Creating outer scope");
+            Console.WriteLine("Creating scope");
             using (var scope1 = globalProvider.CreateScope())
             {
                 scope1.ServiceProvider.GetService<B>();
+                scope1.ServiceProvider.GetService<B>();
 
-                Console.WriteLine("Creating inner scope");
-                using (var scope2 = globalProvider.CreateScope())
-                {
-                    scope2.ServiceProvider.GetService<C>();
-                }
+
                 Console.WriteLine("out of inner scope");
             }
             Console.WriteLine("out of outer scope");
@@ -58,17 +55,6 @@ namespace CoreConsoleApp
             }
         }
 
-        public class C : IDisposable
-        {
-            public C()
-            {
-                Console.WriteLine("Create C");
-            }
-
-            public void Dispose()
-            {
-                Console.WriteLine("Dispose C");
-            }
-        }
+      
     }
 }
