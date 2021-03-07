@@ -21,7 +21,7 @@ namespace CoreConsoleApp
             {
                 scope1.ServiceProvider.GetService<B>();
 
-                Console.WriteLine("Creating outer scope");
+                Console.WriteLine("Creating inner scope");
                 using (var scope2 = globalProvider.CreateScope())
                 {
                     scope2.ServiceProvider.GetService<C>();
