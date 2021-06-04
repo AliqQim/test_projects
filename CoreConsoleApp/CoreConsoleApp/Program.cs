@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 
 namespace CoreConsoleApp
 {
@@ -8,51 +9,30 @@ namespace CoreConsoleApp
         static void Main(string[] args)
         {
             var services = new ServiceCollection();
-            services.AddScoped<A>();
-            services.AddScoped<B>();
+            services.AddScoped<I, A>();
+            services.AddScoped<I, B>();
 
-
-            Console.WriteLine("Creating global");
             using var globalProvider = services.BuildServiceProvider();
-            globalProvider.GetService<B>();
 
-            Console.WriteLine("Creating scope");
-            using (var scope1 = globalProvider.CreateScope())
-            {
-                scope1.ServiceProvider.GetService<B>();
-                scope1.ServiceProvider.GetService<B>();
-
-
-                Console.WriteLine("out of inner scope");
-            }
-            Console.WriteLine("out of outer scope");
-             Console.WriteLine("DONE");
+            Console.WriteLine("If we want to replace one implementation to another:");
+            Console.WriteLine(globalProvider.GetService<I>()!.GetType());
+            
+            Console.WriteLine("If we want to register set of implementations:");
+            globalProvider.GetServices<I>().ToList().ForEach(x =>
+                Console.WriteLine(x.GetType()));
+            
         }
 
-        public class A : IDisposable
-        {
-            public A()
-            {
-                Console.WriteLine("Create A");
-            }
 
-            public void Dispose()
-            {
-                Console.WriteLine("Dispose A");
-            }
+        public interface I { }
+        public class A : I
+        {
+           
         }
 
-        public class B : IDisposable
+        public class B : I
         {
-            public B()
-            {
-                Console.WriteLine("Create B");
-            }
-
-            public void Dispose()
-            {
-                Console.WriteLine("Dispose B");
-            }
+           
         }
 
       
