@@ -1,3 +1,2 @@
-родительская - Core_ID_scopes
+родительская - Core_DI__replacement_of_implementation__and__several_implementations
 
-(хотя, по - хорошему, должна быть ветка просто с DI коровским)

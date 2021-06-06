@@ -10,16 +10,11 @@ namespace CoreConsoleApp
         {
             var services = new ServiceCollection();
             services.AddScoped<I, A>();
-            services.AddScoped<I, B>();
+            services.AddScoped<B>();    //if remove this - an exception will be thrown
 
             using var globalProvider = services.BuildServiceProvider();
 
-            Console.WriteLine("If we want to replace one implementation to another:");
             Console.WriteLine(globalProvider.GetService<I>()!.GetType());
-            
-            Console.WriteLine("If we want to register set of implementations:");
-            globalProvider.GetServices<I>().ToList().ForEach(x =>
-                Console.WriteLine(x.GetType()));
             
         }
 
@@ -27,7 +22,10 @@ namespace CoreConsoleApp
         public interface I { }
         public class A : I
         {
-           
+           public A(IServiceProvider sp)
+            {
+                var b = sp.GetRequiredService<B>();
+            }
         }
 
         public class B : I
