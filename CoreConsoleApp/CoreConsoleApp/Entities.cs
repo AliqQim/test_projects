@@ -8,7 +8,6 @@ namespace CoreConsoleApp
 {
     public class Person
     {
-        [Key]
         public int Id { get; set; }
 
         public string Name { get; set; } = null!;
@@ -44,5 +43,10 @@ namespace CoreConsoleApp
         }
 
         public virtual DbSet<Person> Persons { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new PersonConfiguration());
+        }
     }
 }
