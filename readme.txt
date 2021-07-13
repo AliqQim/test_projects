@@ -1,1 +1,1 @@
-родительская - Console_Core
+родительская - Console__EF_Core
