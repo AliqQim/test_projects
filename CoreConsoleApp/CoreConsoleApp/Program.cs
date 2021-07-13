@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,11 +11,7 @@ namespace CoreConsoleApp
     {
         static void Main(string[] args)
         {
-            var options = new DbContextOptionsBuilder<MyContext>()
-                .UseSqlServer($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog=MyContext;Integrated Security=True;MultipleActiveResultSets=True")
-                .Options;
-
-            using (var context = new MyContext(options))
+            using (var context = CreateContext())
             {
                 bool reset = true;
 
@@ -44,12 +41,12 @@ namespace CoreConsoleApp
 
                     context.SaveChanges();
                 }
-                                
+
 
                 Console.WriteLine(context.Persons.Count());
 
-                
-                
+
+
 
                 foreach (var p in context.Persons)
                 {
@@ -60,13 +57,29 @@ namespace CoreConsoleApp
 
                 string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
                 Console.WriteLine(firstzamorochkaName);
-                    
+
 
             }
 
             Console.WriteLine("Done!");
         }
+
+        private static MyContext CreateContext()
+        {
+            var options = new DbContextOptionsBuilder<MyContext>()
+                            .UseSqlServer($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog=MyContext;Integrated Security=True;MultipleActiveResultSets=True")
+                            .Options;
+            var context = new MyContext(options);
+            return context;
+        }
+
+        public class MyContextFactory: IDesignTimeDbContextFactory<MyContext>
+        {
+            public MyContext CreateDbContext(string[] args) => CreateContext();
+        }
     }
+
+
 
     
 }
