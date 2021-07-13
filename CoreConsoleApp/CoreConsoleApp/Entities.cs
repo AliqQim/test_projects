@@ -13,7 +13,9 @@ namespace CoreConsoleApp
         public string Name { get; set; } = null!;
         public int Age { get; set; }
 
-        public List<Zamorochka> Zamorochkas { get; set; } = null!;
+        public List<Zamorochka> OwnZamorochkas { get; set; } = null!;
+
+        public Zamorochka UnforgivableZamorochkaOfOtherPerson{ get; set; } = null!;
 
         public Job Job { get; set; } = null!;
 
@@ -21,8 +23,6 @@ namespace CoreConsoleApp
 
     public class Zamorochka
     {
-        [Key]
-        public int Id { get; set; }
         public string Name { get; set; } = null!;
     }
 

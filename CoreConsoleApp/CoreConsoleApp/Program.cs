@@ -18,14 +18,15 @@ namespace CoreConsoleApp
                 if (reset)
                 {
                     context.Database.EnsureDeleted();
-                    context.Database.EnsureCreated();
+                    context.Database.Migrate();
 
                     context.Persons.Add(new Person
                     {
                         Name = "петя",
                         Age = 22,
                         Job = new Job { Name = "работа 1" },
-                        Zamorochkas = new List<Zamorochka> {
+                        UnforgivableZamorochkaOfOtherPerson = new Zamorochka { Name = "Lameness" },
+                        OwnZamorochkas = new List<Zamorochka> {
                             new Zamorochka { Name = "тупо шутит" },
                             new Zamorochka { Name = "безалаберный" },
                         }
@@ -36,7 +37,8 @@ namespace CoreConsoleApp
                         Name = "Вася",
                         Age = 23,
                         Job = new Job { Name = "работа 2" },
-                        Zamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич" } }
+                        UnforgivableZamorochkaOfOtherPerson = new Zamorochka { Name = "Being a smartass" },
+                        OwnZamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич" } }
                     });
 
                     context.SaveChanges();
@@ -51,13 +53,9 @@ namespace CoreConsoleApp
                 foreach (var p in context.Persons)
                 {
                     Console.WriteLine($"{p.Name} {p.Age}");
+                    Console.WriteLine(p.UnforgivableZamorochkaOfOtherPerson.Name);
+                    Console.WriteLine("Заморочки: " + string.Join(", ", p.OwnZamorochkas.Select(x=>x.Name)));
                 }
-
-                var persons = context.Persons.Include(x => x.Zamorochkas);
-
-                string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
-                Console.WriteLine(firstzamorochkaName);
-
 
             }
 

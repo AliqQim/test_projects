@@ -11,6 +11,10 @@ namespace CoreConsoleApp
         public void Configure(EntityTypeBuilder<Person> builder)
         {
             builder.HasKey(x => x.Id);
+
+            builder.OwnsOne(x => x.UnforgivableZamorochkaOfOtherPerson);
+            builder.OwnsMany(x => x.OwnZamorochkas);
+
         }
     }
 }
