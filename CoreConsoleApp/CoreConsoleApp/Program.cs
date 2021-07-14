@@ -85,7 +85,8 @@ namespace CoreConsoleApp
 
             using (var context = CreateContext())
             {
-                context.Persons.Remove(context.Persons.Single(x => x.Name == "петя"));
+                var petya = context.Persons.Single(x => x.Name == "петя");
+                petya.UnforgivableZamorochkaOfOtherPerson = null;   //removed from DB table
                 context.SaveChanges();
             }
 
