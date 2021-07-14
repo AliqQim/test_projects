@@ -13,11 +13,11 @@ namespace CoreConsoleApp
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            using (var context = CreateContext())
-            {
-                bool reset = true;
+            bool reset = true;
 
-                if (reset)
+            if (reset)
+            {
+                using (var context = CreateContext())
                 {
                     context.Database.EnsureDeleted();
                     //context.Database.EnsureCreated();
@@ -52,6 +52,30 @@ namespace CoreConsoleApp
 
                     context.SaveChanges();
                 }
+            }
+
+            using (var context = CreateContext())
+            {
+                var genimi = context.Zodiacs.Single(x => x.Name == "gemini");
+                var petya = context.Persons.Single(x => x.Name == "петя");
+
+                petya.UnforgivableZamorochkaOfOtherPerson = new Zamorochka { Name = "Stupidness",  ZodiacId = genimi.Id };
+                var toChange = petya.OwnZamorochkas.Single(x => x.Name == "тупо шутит");
+                toChange.Name = "lame jokes";
+                toChange.ZodiacId = genimi.Id;
+
+                var toDelete = petya.OwnZamorochkas.Single(x => x.Name == "безалаберный");
+
+                petya.OwnZamorochkas.Remove(toDelete);
+
+                context.SaveChanges();
+            }
+
+
+
+            using (var context = CreateContext())
+            {
+                
 
 
                 Console.WriteLine(context.Persons.Count());
@@ -59,7 +83,7 @@ namespace CoreConsoleApp
 
 
 
-                foreach (var p in context.Persons)
+                foreach (var p in context.Persons.Include(x=>x.OwnZamorochkas).ThenInclude(x=>x.Zodiac))
                 {
                     Console.WriteLine($"{p.Name} {p.Age}");
                     Console.WriteLine(p.UnforgivableZamorochkaOfOtherPerson);
