@@ -31,15 +31,5 @@ namespace CoreConsoleApp
 
     
 
-    public class ZamorochkaConfiguration : IEntityTypeConfiguration<Zamorochka>
-    {
-        public void Configure(EntityTypeBuilder<Zamorochka> builder)
-        {
-            builder.HasOne(x => x.Zodiac)
-                .WithMany()
-                .HasForeignKey(x => x.ZodiacId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-        }
-    }
+  
 }
