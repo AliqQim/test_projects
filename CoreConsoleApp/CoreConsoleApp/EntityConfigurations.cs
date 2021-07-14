@@ -12,7 +12,10 @@ namespace CoreConsoleApp
         {
             builder.HasKey(x => x.Id);
 
-            SetUpZodiacForeignKey(builder.OwnsOne(x => x.UnforgivableZamorochkaOfOtherPerson));
+
+            SetUpZodiacForeignKey(
+                builder.OwnsOne(x => x.UnforgivableZamorochkaOfOtherPerson)
+                .ToTable("UnforgivableZamorochkas"));
 
             SetUpZodiacForeignKey(builder.OwnsMany(x => x.OwnZamorochkas));
                 
@@ -21,7 +24,8 @@ namespace CoreConsoleApp
 
         static void SetUpZodiacForeignKey(OwnedNavigationBuilder<Person, Zamorochka> builder)
         {
-            builder.HasOne(z => z.Zodiac)
+            builder
+                .HasOne(z => z.Zodiac)
                 .WithMany()
                 .HasForeignKey(z => z.ZodiacId)
                 .OnDelete(DeleteBehavior.NoAction);

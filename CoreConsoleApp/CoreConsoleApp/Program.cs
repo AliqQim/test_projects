@@ -20,8 +20,8 @@ namespace CoreConsoleApp
                 using (var context = CreateContext())
                 {
                     context.Database.EnsureDeleted();
-                    //context.Database.EnsureCreated();
-                    context.Database.Migrate();
+                    context.Database.EnsureCreated();
+                    //context.Database.Migrate();
 
                     var taurus = new Zodiac { Name = "taurus" };
                     var gemini = new Zodiac { Name = "gemini" };
@@ -50,9 +50,21 @@ namespace CoreConsoleApp
                         OwnZamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич", Zodiac = taurus } }
                     });
 
+                    context.Persons.Add(new Person
+                    {
+                        Name = "сидор без нелюбимых заморочек",
+                        Age = 22,
+                        Job = new Job { Name = "работа 1" },
+                        UnforgivableZamorochkaOfOtherPerson = null,
+                        OwnZamorochkas = new List<Zamorochka> {}
+
+                    });
+
                     context.SaveChanges();
                 }
             }
+
+            
 
             using (var context = CreateContext())
             {
@@ -71,7 +83,11 @@ namespace CoreConsoleApp
                 context.SaveChanges();
             }
 
-
+            using (var context = CreateContext())
+            {
+                context.Persons.Remove(context.Persons.Single(x => x.Name == "петя"));
+                context.SaveChanges();
+            }
 
             using (var context = CreateContext())
             {
