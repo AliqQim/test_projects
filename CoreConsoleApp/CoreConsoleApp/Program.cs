@@ -11,6 +11,8 @@ namespace CoreConsoleApp
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             using (var context = CreateContext())
             {
                 bool reset = true;
@@ -18,17 +20,24 @@ namespace CoreConsoleApp
                 if (reset)
                 {
                     context.Database.EnsureDeleted();
+                    //context.Database.EnsureCreated();
                     context.Database.Migrate();
+
+                    var taurus = new Zodiac { Name = "taurus" };
+                    var gemini = new Zodiac { Name = "gemini" };
+
+                    context.Zodiacs.Add(taurus);
+                    context.Zodiacs.Add(gemini);
 
                     context.Persons.Add(new Person
                     {
                         Name = "петя",
                         Age = 22,
                         Job = new Job { Name = "работа 1" },
-                        UnforgivableZamorochkaOfOtherPerson = new Zamorochka { Name = "Lameness" },
+                        UnforgivableZamorochkaOfOtherPerson = new Zamorochka { Name = "Lameness", Zodiac = gemini },
                         OwnZamorochkas = new List<Zamorochka> {
-                            new Zamorochka { Name = "тупо шутит" },
-                            new Zamorochka { Name = "безалаберный" },
+                            new Zamorochka { Name = "тупо шутит", Zodiac = taurus },
+                            new Zamorochka { Name = "безалаберный", Zodiac = gemini },
                         }
 
                     });
@@ -37,8 +46,8 @@ namespace CoreConsoleApp
                         Name = "Вася",
                         Age = 23,
                         Job = new Job { Name = "работа 2" },
-                        UnforgivableZamorochkaOfOtherPerson = new Zamorochka { Name = "Being a smartass" },
-                        OwnZamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич" } }
+                        UnforgivableZamorochkaOfOtherPerson = new Zamorochka { Name = "Being a smartass", Zodiac = gemini },
+                        OwnZamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич", Zodiac = taurus } }
                     });
 
                     context.SaveChanges();
@@ -53,8 +62,8 @@ namespace CoreConsoleApp
                 foreach (var p in context.Persons)
                 {
                     Console.WriteLine($"{p.Name} {p.Age}");
-                    Console.WriteLine(p.UnforgivableZamorochkaOfOtherPerson.Name);
-                    Console.WriteLine("Заморочки: " + string.Join(", ", p.OwnZamorochkas.Select(x=>x.Name)));
+                    Console.WriteLine(p.UnforgivableZamorochkaOfOtherPerson);
+                    Console.WriteLine("Заморочки: " + string.Join(", ", p.OwnZamorochkas));
                 }
 
             }
