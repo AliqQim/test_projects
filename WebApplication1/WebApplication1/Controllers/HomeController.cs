@@ -20,11 +20,21 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Index xoN!");
+
+            MethodMan();
+
             return View();
+        }
+
+        private void MethodMan()
+        {
+            _logger.LogInformation("MethodMan xoN!");
         }
 
         public IActionResult Privacy()
         {
+            _logger.LogInformation("Privacy xoN!");
             return View();
         }
 
