@@ -25,12 +25,13 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddApplicationInsightsTelemetry(
+                @"InstrumentationKey=77d238fc-36b4-41af-893e-60868b883c6b;IngestionEndpoint=https://northcentralus-0.in.applicationinsights.azure.com/");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddFile($"{Directory.GetCurrentDirectory()}\\Logs\\Log.txt");
 
             if (env.IsDevelopment())
             {
