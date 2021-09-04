@@ -30,6 +30,8 @@ namespace WebApplication1.Controllers
         private void MethodMan()
         {
             _logger.LogInformation("MethodMan xoN!");
+            _logger.LogWarning("warning xoN!");
+            _logger.LogError("error xoN!");
         }
 
         public IActionResult Privacy()
