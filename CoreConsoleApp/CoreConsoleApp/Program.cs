@@ -11,6 +11,8 @@ namespace CoreConsoleApp
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             using (var context = CreateContext())
             {
                 bool reset = true;
@@ -23,6 +25,7 @@ namespace CoreConsoleApp
                     context.Persons.Add(new Person
                     {
                         Name = "петя",
+                        MatrimonialStatus = MatrimonialStatus.Married,
                         Age = 22,
                         Job = new Job { Name = "работа 1" },
                         Zamorochkas = new List<Zamorochka> {
@@ -50,7 +53,7 @@ namespace CoreConsoleApp
 
                 foreach (var p in context.Persons)
                 {
-                    Console.WriteLine($"{p.Name} {p.Age}");
+                    Console.WriteLine($"{p.Name} {p.Age} {p.MatrimonialStatus}");
                 }
 
                 var persons = context.Persons.Include(x => x.Zamorochkas);

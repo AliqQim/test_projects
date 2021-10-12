@@ -6,12 +6,19 @@ using System.Text;
 
 namespace CoreConsoleApp
 {
+
+    public enum MatrimonialStatus
+    {
+        Single = 1, Married = 2
+    }
     public class Person
     {
         public int Id { get; set; }
 
         public string Name { get; set; } = null!;
         public int Age { get; set; }
+
+        public MatrimonialStatus MatrimonialStatus { get; set; } = MatrimonialStatus.Single;
 
         public List<Zamorochka> Zamorochkas { get; set; } = null!;
 
