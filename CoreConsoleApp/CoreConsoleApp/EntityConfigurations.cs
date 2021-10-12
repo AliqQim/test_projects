@@ -12,7 +12,7 @@ namespace CoreConsoleApp
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(x => x.MatrimonialStatusEntry)
+            builder.HasOne<MatrimonialStatusEntry>()
                 .WithMany().HasForeignKey(x => x.MatrimonialStatus)
                 .OnDelete(DeleteBehavior.NoAction);
         }

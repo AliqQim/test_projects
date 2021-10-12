@@ -19,7 +19,6 @@ namespace CoreConsoleApp
         public int Age { get; set; }
 
         public MatrimonialStatus MatrimonialStatus { get; set; } = MatrimonialStatus.Single;
-        public MatrimonialStatusEntry MatrimonialStatusEntry { get; set; } = null!;
 
         public List<Zamorochka> Zamorochkas { get; set; } = null!;
 
