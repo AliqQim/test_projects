@@ -1,1 +1,1 @@
-родительская - Console__EF_Core
+родительская - EF_Core__ConfigurationAndMigrations
