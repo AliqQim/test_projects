@@ -1,1 +1,1 @@
-родительская - EF_Core__ConfigurationAndMigrations
+родительская - EF_Core_Enums_InDbTable

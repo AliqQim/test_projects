@@ -51,7 +51,7 @@ namespace CoreConsoleApp
 
 
 
-                foreach (var p in context.Persons)
+                foreach (var p in context.Persons.Where(x=>x.MatrimonialStatus == MatrimonialStatus.Married))
                 {
                     Console.WriteLine($"{p.Name} {p.Age} {p.MatrimonialStatus}");
                 }
