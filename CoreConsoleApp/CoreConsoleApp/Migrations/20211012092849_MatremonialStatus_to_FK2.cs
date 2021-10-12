@@ -6,6 +6,8 @@ namespace CoreConsoleApp.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            //an update query should be here which sets appropriate values in the future FK column
+
             migrationBuilder.RenameColumn(
                 name: "MatrimonialStatus",
                 table: "Persons",
