@@ -18,7 +18,8 @@ namespace CoreConsoleApp
         public string Name { get; set; } = null!;
         public int Age { get; set; }
 
-        public MatrimonialStatus MatrimonialStatus { get; set; } = MatrimonialStatus.Single;
+        public int MatrimonialStatusId { get; set; } = (int) MatrimonialStatus.Single;
+        public MatrimonialStatusEntry MatrimonialStatusEntry { get; set; } = null!;
 
         public List<Zamorochka> Zamorochkas { get; set; } = null!;
 
@@ -40,7 +41,13 @@ namespace CoreConsoleApp
         public string Name { get; set; } = null!;
     }
 
+    public class MatrimonialStatusEntry
+    {
+        public int Id { get; set; }
 
+        public string Name { get; set; } = null!;
+
+    }
 
     public class MyContext : DbContext
     {
@@ -54,6 +61,7 @@ namespace CoreConsoleApp
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new PersonConfiguration());
+            modelBuilder.ApplyConfiguration(new MatrimonialStatusEntryConfiguration());
         }
     }
 }
