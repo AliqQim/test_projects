@@ -25,7 +25,7 @@ namespace CoreConsoleApp
                     context.Persons.Add(new Person
                     {
                         Name = "петя",
-                        MatrimonialStatusId = (int) MatrimonialStatus.Married,
+                        MatrimonialStatus = MatrimonialStatus.Married,
                         Age = 22,
                         Job = new Job { Name = "работа 1" },
                         Zamorochkas = new List<Zamorochka> {
@@ -53,7 +53,7 @@ namespace CoreConsoleApp
 
                 foreach (var p in context.Persons)
                 {
-                    Console.WriteLine($"{p.Name} {p.Age} {p.MatrimonialStatusId}");
+                    Console.WriteLine($"{p.Name} {p.Age} {p.MatrimonialStatus}");
                 }
 
                 var persons = context.Persons.Include(x => x.Zamorochkas);

@@ -2,23 +2,15 @@
 
 namespace CoreConsoleApp.Migrations
 {
-    public partial class MatremonialStatus_to_FK2 : Migration
+    public partial class MatremonialStatus_FK : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            //an update query should be here which sets appropriate values in the future FK column
-
-            migrationBuilder.RenameColumn(
-                name: "MatrimonialStatus",
-                table: "Persons",
-                newName: "MatrimonialStatusId");
-
             migrationBuilder.CreateTable(
                 name: "MatrimonialStatusEntry",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -37,14 +29,14 @@ namespace CoreConsoleApp.Migrations
                 values: new object[] { 2, "Married!" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Persons_MatrimonialStatusId",
+                name: "IX_Persons_MatrimonialStatus",
                 table: "Persons",
-                column: "MatrimonialStatusId");
+                column: "MatrimonialStatus");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Persons_MatrimonialStatusEntry_MatrimonialStatusId",
+                name: "FK_Persons_MatrimonialStatusEntry_MatrimonialStatus",
                 table: "Persons",
-                column: "MatrimonialStatusId",
+                column: "MatrimonialStatus",
                 principalTable: "MatrimonialStatusEntry",
                 principalColumn: "Id");
         }
@@ -52,20 +44,15 @@ namespace CoreConsoleApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Persons_MatrimonialStatusEntry_MatrimonialStatusId",
+                name: "FK_Persons_MatrimonialStatusEntry_MatrimonialStatus",
                 table: "Persons");
 
             migrationBuilder.DropTable(
                 name: "MatrimonialStatusEntry");
 
             migrationBuilder.DropIndex(
-                name: "IX_Persons_MatrimonialStatusId",
+                name: "IX_Persons_MatrimonialStatus",
                 table: "Persons");
-
-            migrationBuilder.RenameColumn(
-                name: "MatrimonialStatusId",
-                table: "Persons",
-                newName: "MatrimonialStatus");
         }
     }
 }

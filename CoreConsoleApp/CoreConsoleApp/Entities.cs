@@ -18,7 +18,7 @@ namespace CoreConsoleApp
         public string Name { get; set; } = null!;
         public int Age { get; set; }
 
-        public int MatrimonialStatusId { get; set; } = (int) MatrimonialStatus.Single;
+        public MatrimonialStatus MatrimonialStatus { get; set; } = MatrimonialStatus.Single;
         public MatrimonialStatusEntry MatrimonialStatusEntry { get; set; } = null!;
 
         public List<Zamorochka> Zamorochkas { get; set; } = null!;
@@ -43,7 +43,7 @@ namespace CoreConsoleApp
 
     public class MatrimonialStatusEntry
     {
-        public int Id { get; set; }
+        public MatrimonialStatus Id { get; set; }
 
         public string Name { get; set; } = null!;
 

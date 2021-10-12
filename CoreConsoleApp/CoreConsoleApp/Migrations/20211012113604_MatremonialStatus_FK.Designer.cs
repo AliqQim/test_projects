@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoreConsoleApp.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20211012092849_MatremonialStatus_to_FK2")]
-    partial class MatremonialStatus_to_FK2
+    [Migration("20211012113604_MatremonialStatus_FK")]
+    partial class MatremonialStatus_FK
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,9 +40,7 @@ namespace CoreConsoleApp.Migrations
             modelBuilder.Entity("CoreConsoleApp.MatrimonialStatusEntry", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -78,7 +76,7 @@ namespace CoreConsoleApp.Migrations
                     b.Property<int?>("JobId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MatrimonialStatusId")
+                    b.Property<int>("MatrimonialStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -89,7 +87,7 @@ namespace CoreConsoleApp.Migrations
 
                     b.HasIndex("JobId");
 
-                    b.HasIndex("MatrimonialStatusId");
+                    b.HasIndex("MatrimonialStatus");
 
                     b.ToTable("Persons");
                 });
@@ -123,7 +121,7 @@ namespace CoreConsoleApp.Migrations
 
                     b.HasOne("CoreConsoleApp.MatrimonialStatusEntry", "MatrimonialStatusEntry")
                         .WithMany()
-                        .HasForeignKey("MatrimonialStatusId")
+                        .HasForeignKey("MatrimonialStatus")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
