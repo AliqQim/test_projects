@@ -5,17 +5,17 @@
     <title></title>
 </head>
 <body>
-    <!-- This is a *view* - HTML markup that defines the appearance of your UI -->
+Ура!
+<div data-bind="foreach: strings">
+    <input data-bind="value: str"/>
+    <br/>
+</div>
 
-    <p>First name: <strong data-bind="text: firstName"></strong></p>
-    <p>Last name: <strong data-bind="text: lastName"></strong></p>
-
-    <p>First name: <input data-bind="value: firstName" /></p>
-    <p>Last name: <input data-bind="value: lastName" /></p>
-
-    <p>Full name: <strong data-bind="text: fullName"></strong></p>
-
-    <button data-bind="click: capitalizeLastName">Go caps</button>
+<div data-bind="foreach: strings">
+    <span data-bind="text: str"></span>
+    <br />
+</div>
+<button data-bind="click:showSmth">clicl me</button>
 
     <script src="knockout-3.5.1.js"></script>
     <script src="Script.js"></script>
