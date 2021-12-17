@@ -6,7 +6,7 @@ function AppViewModel() {
     ]);
 
     this.showSmth=() => {
-        alert(999); //**!!
+        this.strings.push({ str: ko.observable("") });
     }
       
 }
