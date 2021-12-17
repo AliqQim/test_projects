@@ -7,7 +7,7 @@
 <body>
 Ура!
 <div data-bind="foreach: strings">
-    <input data-bind="value: str"/>
+    <input data-bind="value: str"/><button data-bind="click:$root.removeStrItem">remove</button>
     <br/>
 </div>
 
@@ -15,7 +15,7 @@
     <span data-bind="text: str"></span>
     <br />
 </div>
-<button data-bind="click:showSmth">clicl me</button>
+<button data-bind="click:addStrItem">click me</button>
 
     <script src="knockout-3.5.1.js"></script>
     <script src="Script.js"></script>

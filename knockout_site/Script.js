@@ -5,8 +5,12 @@ function AppViewModel() {
         { str: ko.observable("rty")}
     ]);
 
-    this.showSmth=() => {
+    this.addStrItem=() => {
         this.strings.push({ str: ko.observable("") });
+    }
+
+    this.removeStrItem = (itemToRemove)=> {
+        this.strings.remove(itemToRemove);
     }
       
 }
