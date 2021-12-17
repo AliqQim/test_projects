@@ -1,1 +1,1 @@
-родительская - knockout
+родительская - knockout_array

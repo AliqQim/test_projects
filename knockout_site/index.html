@@ -7,12 +7,12 @@
 <body>
 Ура!
 <div data-bind="foreach: strings">
-    <input data-bind="value: str"/><button data-bind="click:$parent.removeStrItem">remove</button>
+    <input data-bind="value: $rawData"/><button data-bind="click:$parent.removeStrItem">remove</button>
     <br/>
 </div>
 
 <div data-bind="foreach: strings">
-    <span data-bind="text: str"></span>
+    <span data-bind="text: $rawData"></span>
     <br />
 </div>
 <button data-bind="click:addStrItem">click me</button>
