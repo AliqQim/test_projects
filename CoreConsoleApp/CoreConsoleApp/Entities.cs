@@ -10,6 +10,8 @@ namespace CoreConsoleApp
     {
         public int Id { get; set; }
 
+
+        internal const string NameOfNameField = nameof(_name);
         private string _name = null!;
 
         public string GetPivateNameVal() => _name;

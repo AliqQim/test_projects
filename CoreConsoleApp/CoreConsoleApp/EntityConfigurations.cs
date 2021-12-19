@@ -11,6 +11,7 @@ namespace CoreConsoleApp
         public void Configure(EntityTypeBuilder<Person> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.Property(Person.NameOfNameField).HasColumnName("Name");
         }
     }
 }

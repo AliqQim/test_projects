@@ -48,9 +48,10 @@ namespace CoreConsoleApp.Migrations
                     b.Property<int?>("JobId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("_name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Name");
 
                     b.HasKey("Id");
 
