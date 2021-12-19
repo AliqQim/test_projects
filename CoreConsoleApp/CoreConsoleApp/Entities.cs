@@ -10,7 +10,11 @@ namespace CoreConsoleApp
     {
         public int Id { get; set; }
 
-        public string Name { get; set; } = null!;
+        private string _name = null!;
+
+        public string GetPivateNameVal() => _name;
+        public void SetPivateNameVal(string newVal) => _name = newVal;
+
         public int Age { get; set; }
 
         public List<Zamorochka> Zamorochkas { get; set; } = null!;

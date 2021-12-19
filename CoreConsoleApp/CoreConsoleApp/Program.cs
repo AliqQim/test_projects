@@ -20,24 +20,32 @@ namespace CoreConsoleApp
                     context.Database.EnsureDeleted();
                     context.Database.EnsureCreated();
 
-                    context.Persons.Add(new Person
+                    var person1 = new Person
                     {
-                        Name = "петя",
                         Age = 22,
-                        Job = new Job { Name = "работа 1" },
-                        Zamorochkas = new List<Zamorochka> {
-                            new Zamorochka { Name = "тупо шутит" },
-                            new Zamorochka { Name = "безалаберный" },
+                        Job = new Job {Name = "работа 1"},
+                        Zamorochkas = new List<Zamorochka>
+                        {
+                            new Zamorochka {Name = "тупо шутит"},
+                            new Zamorochka {Name = "безалаберный"},
                         }
 
-                    });
-                    context.Persons.Add(new Person
+                    };
+                    person1.SetPivateNameVal("петя");
+
+                    context.Persons.Add(person1);
+
+
+                    var person2 = new Person
                     {
-                        Name = "Вася",
                         Age = 23,
-                        Job = new Job { Name = "работа 2" },
-                        Zamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич" } }
-                    });
+                        Job = new Job {Name = "работа 2"},
+                        Zamorochkas = new List<Zamorochka> {new Zamorochka {Name = "далбич"}}
+                    };
+
+                    person2.SetPivateNameVal("Вася");
+
+                    context.Persons.Add(person2);
 
                     context.SaveChanges();
                 }
@@ -50,7 +58,7 @@ namespace CoreConsoleApp
 
                 foreach (var p in context.Persons)
                 {
-                    Console.WriteLine($"{p.Name} {p.Age}");
+                    Console.WriteLine($"{p.GetPivateNameVal()} {p.Age}");
                 }
 
                 var persons = context.Persons.Include(x => x.Zamorochkas);
