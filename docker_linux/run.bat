@@ -1,6 +1,6 @@
 docker build . -t mylinux_image
 
-docker run --rm -it --name=mylinux mylinux_image
+docker run --volume /extenral_folder:../attached_folder --rm -it --name=mylinux mylinux_image
 
 docker attach mylinux 
 
