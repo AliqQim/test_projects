@@ -38,6 +38,13 @@ namespace ServerWebApiApp
             }
 
             app.UseHttpsRedirection();
+            
+            //explanation: https://stackoverflow.com/questions/48285408/how-to-disable-cors-completely-in-webapi - "have tried to understand CORS and this is how I understand it now - Please correct me if I am wrong"
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
             app.UseRouting();
 
