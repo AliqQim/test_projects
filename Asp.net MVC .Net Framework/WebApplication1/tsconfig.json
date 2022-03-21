@@ -2,6 +2,6 @@
   "compileOnSave": true,
   "buildOnSave": true,
   "compilerOptions": {
-
+    "target": "ES6"
   }
 }
