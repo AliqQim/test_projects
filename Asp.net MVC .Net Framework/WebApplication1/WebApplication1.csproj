@@ -143,6 +143,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="mocha\run_tests.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -190,8 +191,11 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="mocha\my_test.ts" />
     <TypeScriptCompile Include="ScriptsTS\Adder.ts" />
     <TypeScriptCompile Include="ScriptsTS\site.ts" />
+    <TypeScriptCompile Include="ScriptsTS\typings\chai.d.ts" />
+    <TypeScriptCompile Include="ScriptsTS\typings\mocha.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
