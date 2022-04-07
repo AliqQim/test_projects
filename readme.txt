@@ -1,1 +1,1 @@
-родитель - master
+родитель - Mvc.Core_New_Proj
