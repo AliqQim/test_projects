@@ -12,7 +12,7 @@ namespace CoreConsoleApp
 
         public string Name { get; set; } = null!;
         public int Age { get; set; }
-        public string Deviz { get; set; } = null!;
+        public string Devizion { get; set; } = null!;
 
         public List<Zamorochka> Zamorochkas { get; set; } = null!;
 

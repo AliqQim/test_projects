@@ -24,7 +24,7 @@ namespace CoreConsoleApp
                     {
                         Name = "петя",
                         Age = 22,
-                        Deviz = "ура!",
+                        Devizion = "ура!",
                         Job = new Job {Name = "работа 1"}
 
                     });
@@ -40,7 +40,7 @@ namespace CoreConsoleApp
 
                 foreach (var p in context.Persons)
                 {
-                    Console.WriteLine($"{p.Name} {p.Age} {p.Deviz}");
+                    Console.WriteLine($"{p.Name} {p.Age} {p.Devizion}");
                 }
             }
 
