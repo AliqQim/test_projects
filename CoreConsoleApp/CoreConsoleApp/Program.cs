@@ -18,47 +18,30 @@ namespace CoreConsoleApp
                 if (reset)
                 {
                     context.Database.EnsureDeleted();
-                    context.Database.EnsureCreated();
+                    context.Database.Migrate();
 
                     context.Persons.Add(new Person
                     {
                         Name = "петя",
                         Age = 22,
-                        Job = new Job { Name = "работа 1" },
-                        Zamorochkas = new List<Zamorochka> {
-                            new Zamorochka { Name = "тупо шутит" },
-                            new Zamorochka { Name = "безалаберный" },
-                        }
+                        Deviz = "ура!",
+                        Job = new Job {Name = "работа 1"}
 
                     });
-                    context.Persons.Add(new Person
-                    {
-                        Name = "Вася",
-                        Age = 23,
-                        Job = new Job { Name = "работа 2" },
-                        Zamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич" } }
-                    });
+
 
                     context.SaveChanges();
                 }
 
 
-                Console.WriteLine(context.Persons.Count());
-
-
-
+            }
+            using (var context = CreateContext())
+            {
 
                 foreach (var p in context.Persons)
                 {
-                    Console.WriteLine($"{p.Name} {p.Age}");
+                    Console.WriteLine($"{p.Name} {p.Age} {p.Deviz}");
                 }
-
-                var persons = context.Persons.Include(x => x.Zamorochkas);
-
-                string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
-                Console.WriteLine(firstzamorochkaName);
-
-
             }
 
             Console.WriteLine("Done!");
