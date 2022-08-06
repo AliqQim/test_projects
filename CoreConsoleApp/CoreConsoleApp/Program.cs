@@ -17,8 +17,8 @@ namespace CoreConsoleApp
 
                 if (reset)
                 {
-                    context.Database.EnsureDeleted();
-                    context.Database.EnsureCreated();
+                    //context.Database.EnsureDeleted();
+                    //context.Database.EnsureCreated();
 
                     context.Persons.Add(new Person
                     {
