@@ -11,16 +11,19 @@ namespace CoreConsoleApp
             var doc = new XmlDocument();
             doc.LoadXml(File.ReadAllText("XMLFile1.xml"));
 
-            //если не присвоить падлючий префикс дефолтовому XML - из XPath к нему ниака не обратишься
-            //(ну, точнее, обратишься, но через три жопы)
-            //типа, безопасность, типизированность 
-            var nsMgr = new XmlNamespaceManager(doc.NameTable);
-            nsMgr.AddNamespace("m", "http://www.gribuser.ru/xml/fictionbook/2.0");
+            Console.WriteLine("nodes by inner tag's attribute value:");
 
-            var author = doc.SelectSingleNode("/m:FictionBook/m:description/m:title-info/m:author",
-                nsMgr);
+            var nodes = doc.SelectNodes("/persons/person[./sourcedid[./id[text() = 2345]]]");
 
-            Console.WriteLine(author.InnerText);
+            
+            foreach (XmlNode node in nodes)
+            {
+                Console.WriteLine("---");
+                Console.WriteLine(node.InnerXml);
+                Console.WriteLine(node.InnerText);
+
+            }
+
 
             Console.WriteLine("DONE");
         }
