@@ -20,8 +20,15 @@ namespace CoreConsoleApp
             {
                 Console.WriteLine("---");
                 Console.WriteLine(node.InnerXml);
-                Console.WriteLine(node.InnerText);
+            }
 
+
+            Console.WriteLine("\nnodes with no or empty attribute of inner tag:");
+            nodes = doc.SelectNodes("/persons/person[not(sourcedid/id[string-length(text()) > 0])]");
+            foreach (XmlNode node in nodes)
+            {
+                Console.WriteLine("---");
+                Console.WriteLine(node.InnerXml);
             }
 
 
