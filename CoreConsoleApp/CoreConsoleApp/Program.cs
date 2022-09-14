@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Xml;
 
 namespace CoreConsoleApp
@@ -15,17 +16,22 @@ namespace CoreConsoleApp
 
             var nodes = doc.SelectNodes("/persons/person[./sourcedid[./id[text() = 2345]]]");
 
-            
-            foreach (XmlNode node in nodes)
+
+
+            foreach (XmlNode node in nodes.OfType<object?>().Cast<XmlNode>())
             {
-                Console.WriteLine("---");
-                Console.WriteLine(node.InnerXml);
+                if (node != null)
+                {
+                    Console.WriteLine("---");
+                    Console.WriteLine(node.InnerXml);
+                }
             }
+
 
 
             Console.WriteLine("\nnodes with no or empty attribute of inner tag:");
             nodes = doc.SelectNodes("/persons/person[not(sourcedid/id[string-length(text()) > 0])]");
-            foreach (XmlNode node in nodes)
+            foreach (XmlNode node in nodes.OfType<object?>().Cast<XmlNode>())
             {
                 Console.WriteLine("---");
                 Console.WriteLine(node.InnerXml);
