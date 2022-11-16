@@ -1,4 +1,4 @@
 {
-  "include": [ "wwwroot/**/*" ],
-  "exclude": ["wwwroot/lib/**/*"]
+  "include": [ "wwwroot/**/*", "ts_typings/**/*" ],
+  "exclude": [ "wwwroot/lib/**/*" ]
 }
