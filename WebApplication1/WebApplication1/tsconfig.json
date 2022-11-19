@@ -1,4 +1,7 @@
 {
   "include": [ "wwwroot/**/*", "ts_typings/**/*" ],
-  "exclude": [ "wwwroot/lib/**/*" ]
+  "exclude": [ "wwwroot/lib/**/*" ],
+  "compilerOptions": {
+    "target": "ES6"
+  }
 }

@@ -1,3 +1,10 @@
-﻿import axios from "../../ts_typings/axios";
+﻿import axios from "../ts_typings/axios";    //it appears that axios.d.ts has an "export" instruction inside,
+//which means it's treater as a module => it's contents should be imported
+//=> this file also becomes a module
 
-axios.get('/user?ID=12345')
+//soo looks like all the files in the project become modules, all would have these "import"/"export" instructions
+
+
+axios.get('/user?ID=123456')
+
+$("#www").add("");
