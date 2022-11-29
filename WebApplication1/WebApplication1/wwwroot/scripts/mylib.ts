@@ -1,1 +1,0 @@
-﻿export const greet = (): void => alert("hi!");

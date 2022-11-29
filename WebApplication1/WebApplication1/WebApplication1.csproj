@@ -13,16 +13,10 @@
   <ItemGroup>
     <None Include="wwwroot\ts_typings\jquery\LICENSE" />
     <None Include="wwwroot\ts_typings\jquery\README.md" />
-    <None Include="wwwroot\ts_typings\sizzle\LICENSE" />
-    <None Include="wwwroot\ts_typings\sizzle\README.md" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.9" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.8.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
 </Project>

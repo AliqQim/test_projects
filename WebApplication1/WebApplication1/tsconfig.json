@@ -3,7 +3,7 @@
   "exclude": [ "wwwroot/lib/**/*" ],
   "compilerOptions": {
     "target": "ES6",
-    "noResolve": true,  //to skip "///<Reference type=..." resolution. 
+    "noResolve": true  //to skip "///<Reference type=..." resolution. 
                        //It helps when both type declarations are inside 
                       //TS src folder but the second is not resolvable from the reference declaration of the first
   }
