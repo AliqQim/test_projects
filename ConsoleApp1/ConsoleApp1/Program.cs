@@ -16,25 +16,30 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+
+            Console.WriteLine("Reading int:");
+            JObject jobj = JObject.Parse(File.ReadAllText("data.json"));
+
+            var val = jobj.SelectToken("_all.total.store.size_in_bytes");
+            long n = val.Value<long>();
+            Console.WriteLine(n);
+
+            Console.WriteLine("Reading bool:");
+            bool boolVal = jobj.SelectToken("_shards.is_collection").Value<bool>();
+            Console.WriteLine(boolVal);
+
+            Console.WriteLine("Detecting non-existant field:");
+            Console.WriteLine(jobj.SelectToken("_shards.null_field") == null);
+            Console.WriteLine(jobj.SelectToken("_shards.null_fieldOOO") == null);
             
-            JObject o = JObject.Parse(File.ReadAllText("data.json"));
-            var indices = (JObject) o.SelectToken("indices");
-            foreach (var index in indices)
+            
+            Console.WriteLine("reading collection...");
+            var jCollection = jobj.SelectToken("testCollection") as JArray;
+
+            foreach (var item in jCollection)
             {
-                string title = index.Key;
-
-                int size = (index.Value as JObject).SelectTokens("..size_in_bytes").First().Value<int>();
-
-                Console.WriteLine($"{title}\t\t\t{ size }");
+                Console.WriteLine(item.SelectToken("_shards.total").Value<int>());
             }
-
-            JObject o2 = JObject.Parse(File.ReadAllText("data2.json"));
-
-            Console.WriteLine("*********пример №2");
-            Console.WriteLine(o2.SelectToken("header.status"));
-            Console.WriteLine(o2.SelectToken("response.signType.cert.body"));
-            Console.WriteLine(o2.SelectToken("response.signType.cert.bodY"));
-            Console.WriteLine(o2.SelectToken("response.signType.cert.bodY", true));
 
             Console.WriteLine("DONE");
             Console.ReadKey();

@@ -1,9 +1,27 @@
 ﻿{
   "_shards": {
-    "total": 592,
-    "successful": 590,
-    "failed": 0
+    "total": 5920,
+    "successful": 5900,
+    "failed": 0,
+    "is_collection": false,
+    "null_field":  null
   },
+  "testCollection": [
+    {
+      "_shards": {
+        "total": 1111,
+        "successful": 5900,
+        "failed": 0
+      }
+    },
+    {
+      "_shards": {
+        "total": 666,
+        "successful": 777,
+        "failed": 1
+      }
+    }
+  ],
   "_all": {
     "primaries": {
       "store": {
