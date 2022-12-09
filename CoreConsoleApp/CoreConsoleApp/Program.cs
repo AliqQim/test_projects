@@ -10,7 +10,7 @@ namespace CoreConsoleApp
         {
             {
                 using var stream = new FileStream(@"c:\tmp\test_output.txt", FileMode.CreateNew);
-                using var writer = new StreamWriter(stream, Encoding.UTF8);
+                using var writer = new StreamWriter(stream, Encoding.Unicode);
                 writer.Write("Алик ел салат");
             }
 
@@ -22,7 +22,7 @@ namespace CoreConsoleApp
 
             {
                 using var stream = new FileStream(@"c:\tmp\test_output3.txt", FileMode.CreateNew);
-                using var writer = new StreamWriter(stream, Encoding.UTF8);
+                using var writer = new StreamWriter(stream, Encoding.Unicode);
 
                 using var src1 = new FileStream(@"c:\tmp\test_output.txt", FileMode.Open, FileAccess.Read);
                 using var reader1 = new StreamReader(src1);
