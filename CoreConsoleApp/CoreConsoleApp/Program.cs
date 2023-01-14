@@ -15,9 +15,13 @@ namespace CoreConsoleApp
 
     }
 
-    [Register(typeof(B), typeof(IB))]
+    
     [Register(typeof(A), typeof(IA))]
-    public partial class Container: IContainer<IB>{}
+    public partial class Container : IContainer<IB>
+    {
+        [Factory]
+        IB CreateB(IA a) => new B(a, "alik");
+    }
 
     public interface IA
     {
@@ -37,14 +41,15 @@ namespace CoreConsoleApp
     public class B : IB
     {
         private readonly IA _a;
+        private readonly string _name;
 
-        public B(IA a)
+        public B(IA a, string name)
         {
             _a = a;
-            
+            _name = name;
         }
 
-        public void f()=> Console.WriteLine(_a);
+        public void f()=> Console.WriteLine($"IA:{_a}, Hello, {_name}");
 
     }
 
