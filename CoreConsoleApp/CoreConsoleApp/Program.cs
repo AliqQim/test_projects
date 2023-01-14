@@ -20,7 +20,7 @@ namespace CoreConsoleApp
     public partial class Container : IContainer<IB>
     {
         [Factory]
-        IB CreateB(IA a) => new B(a, "alik");
+        IB CreateB(Func<IA> a) => new B(a(), "alik");   //Func<IA> - we can order several instantiation delegates and choose one 
     }
 
     public interface IA
