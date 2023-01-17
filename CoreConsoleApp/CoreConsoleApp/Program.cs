@@ -10,6 +10,7 @@ namespace CoreConsoleApp
         static void Main(string[] args)
         {
             new Container().Run(x => x.f());
+            new UnitTestContainer().Run(x => x.f());
             Console.WriteLine("DONE");
         }
 
@@ -17,7 +18,24 @@ namespace CoreConsoleApp
 
     [Register(typeof(B), typeof(IB))]
     [Register(typeof(A), typeof(IA))]
+    public class Module
+    {
+    }
+
+
+    [RegisterModule(typeof(Module))]
     public partial class Container: IContainer<IB>{}
+
+    public class TestIAMock : IA
+    {
+
+    }
+
+    [RegisterModule(typeof(Module))]
+    [Register(typeof(TestIAMock), typeof(IA))]
+    public partial class UnitTestContainer: IContainer<IB>{}
+
+    
 
     public interface IA
     {

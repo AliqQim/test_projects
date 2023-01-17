@@ -1,1 +1,1 @@
-родительская - Console_Core
+родительская - DI_StrongInject
