@@ -1,21 +1,19 @@
 ﻿
 
+using CoreConsoleApp;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Channels;
 
-var options = new DbContextOptionsBuilder<MyContext>()
-                .UseSqlServer($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog=MyContext;Integrated Security=True;MultipleActiveResultSets=True")
-                .Options;
-
-using (var context = new MyContext(options))
+using (var context = MyContextFactory.CreateContext())
 {
     bool reset = true;
 
     if (reset)
     {
-        context.Database.EnsureDeleted();
-        context.Database.EnsureCreated();
+        //context.Database.EnsureDeleted();
+        //context.Database.EnsureCreated();
 
         context.Persons.Add(new Person
         {
@@ -62,42 +60,17 @@ Console.WriteLine("DONE");
 Console.ReadKey();
 
 
-public class Person
+
+public class MyContextFactory : IDesignTimeDbContextFactory<MyContext>
 {
-    [Key]
-    public int Id { get; set; }
+    public MyContext CreateDbContext(string[] args) => CreateContext();
 
-    public string Name { get; set; } = null!;
-    public int Age { get; set; }
-
-    public List<Zamorochka> Zamorochkas { get; set; } = null!;
-
-    public Job Job { get; set; } = null!;
-
-}
-
-public class Zamorochka
-{
-    [Key]
-    public int Id { get; set; }
-    public string Name { get; set; } = null!;
-}
-
-public class Job
-{
-    [Key]
-    public int Id { get; set; }
-    public string Name { get; set; } = null!;
-}
-
-
-
-public class MyContext : DbContext
-{
-    public MyContext(DbContextOptions<MyContext> options)
-        : base(options)
+    public static MyContext CreateContext()
     {
+        var options = new DbContextOptionsBuilder<MyContext>()
+                        .UseSqlServer($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog=MyContext;Integrated Security=True;MultipleActiveResultSets=True")
+                        .Options;
+        var context = new MyContext(options);
+        return context;
     }
-
-    public virtual DbSet<Person> Persons { get; set; } = null!;
 }
