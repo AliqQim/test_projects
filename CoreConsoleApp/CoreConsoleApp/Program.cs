@@ -1,6 +1,4 @@
-﻿
-
-using CoreConsoleApp;
+﻿using CoreConsoleApp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using System.ComponentModel.DataAnnotations;
@@ -12,8 +10,8 @@ using (var context = MyContextFactory.CreateContext())
 
     if (reset)
     {
-        //context.Database.EnsureDeleted();
-        //context.Database.EnsureCreated();
+        context.Database.EnsureDeleted();
+        context.Database.EnsureCreated();
 
         context.Persons.Add(new Person
         {
