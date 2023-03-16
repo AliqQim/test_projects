@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Design;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Channels;
 
-using (var context = MyContextFactory.CreateContext())
+using (MyContext context = MyContextFactory.CreateContext())
 {
-    bool reset = true;
+    bool reset = false;
 
     if (reset)
     {
@@ -36,21 +36,11 @@ using (var context = MyContextFactory.CreateContext())
     }
 
 
-    Console.WriteLine(context.Persons.Count());
+    var businessLogic = new BusinessLogic(context);
+    var joinedRes = await businessLogic.GetJoinedDataAsync();
 
-
-
-
-    foreach (var p in context.Persons)
-    {
-        Console.WriteLine($"{p.Name} {p.Age}");
-    }
-
-    var persons = context.Persons.Include(x => x.Zamorochkas);
-
-    string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
-    Console.WriteLine(firstzamorochkaName);
-
+    joinedRes.ForEach(x=>Console.WriteLine(x));
+    
 
 }
 
