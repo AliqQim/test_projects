@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
 
 namespace CoreConsoleApp.Tests
 {
@@ -14,7 +15,19 @@ namespace CoreConsoleApp.Tests
         [Test()]
         public void GetJoinedDataAsyncTest()
         {
-            var 
+            var persons = new List<Person>
+            {
+                new()
+                {
+                    Name = "Sidor", Zamorochkas = new List<Zamorochka>
+                    {
+                        new() { Name = "totally normal guy" }
+                    }
+                }
+            };
+
+            var contextMock = new Mock<IMyContext>();
+            //contextMock.Setup(x => x.Persons).Returns(persons.AsQueryable());
         }
     }
 }
