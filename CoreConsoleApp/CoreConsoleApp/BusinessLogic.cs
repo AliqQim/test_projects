@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoreConsoleApp
 {
-    internal class BusinessLogic
+    public class BusinessLogic
     {
-        private readonly MyContext _context;
+        private readonly IMyContext _context;
 
-        public BusinessLogic(MyContext context)
+        public BusinessLogic(IMyContext context)
         {
             _context = context;
         }

@@ -33,9 +33,12 @@ namespace CoreConsoleApp
         public string Name { get; set; } = null!;
     }
 
+    public interface IMyContext
+    {
+        DbSet<Person> Persons { get; set; }
+    }
 
-
-    public class MyContext : DbContext
+    public class MyContext : DbContext, IMyContext
     {
         public MyContext(DbContextOptions<MyContext> options)
             : base(options)
