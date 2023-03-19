@@ -1,6 +1,7 @@
 ﻿using CoreConsoleApp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Channels;
 
@@ -41,7 +42,6 @@ using (MyContext context = MyContextFactory.CreateContext())
 
     joinedRes.ForEach(x=>Console.WriteLine(x));
     
-
 }
 
 Console.WriteLine("DONE");
