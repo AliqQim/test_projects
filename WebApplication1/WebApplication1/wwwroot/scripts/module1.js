@@ -3,4 +3,5 @@ export function f() {
 }
 export function moduleonclick() {
     alert("onclick from module!");
+    f();
 }

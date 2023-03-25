@@ -3,5 +3,7 @@
 }
 
 export function moduleonclick() {
+    
     alert("onclick from module!");
+    f();
 }
