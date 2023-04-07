@@ -21,6 +21,7 @@ namespace CoreConsoleApp
     {
         [Factory]
         IB CreateB(Func<IA> a) => new B(a(), "alik");   //Func<IA> - we can order several instantiation delegates and choose one 
+        //simpler version would be "IB CreateB(IA a) "
     }
 
     public interface IA
