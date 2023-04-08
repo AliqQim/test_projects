@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading.Channels;
-using StrongInject;
+using ClassLibrary1;
 
 namespace CoreConsoleApp
 {
@@ -9,43 +9,12 @@ namespace CoreConsoleApp
     {
         static void Main(string[] args)
         {
-            new Container().Run(x => x.f());
+            DiUsage.DoIt();
             Console.WriteLine("DONE");
         }
 
     }
 
-    [Register(typeof(B), typeof(IB))]
-    [Register(typeof(A), typeof(IA))]
-    public partial class Container: IContainer<IB>{}
-
-    public interface IA
-    {
-
-    }
-
-    public class A : IA
-    {
-
-    }
-
-    public interface IB
-    {
-        void f();
-    }
-
-    public class B : IB
-    {
-        private readonly IA _a;
-
-        public B(IA a)
-        {
-            _a = a;
-            
-        }
-
-        public void f()=> Console.WriteLine(_a);
-
-    }
+    
 
 }
