@@ -8,18 +8,14 @@ string xml = File.ReadAllText("XMLFile1.xml");
 
 XDocument document = XDocument.Parse(xml);
 
-XNamespace mNamespace = "http://www.gribuser.ru/xml/fictionbook/2.0";
+Console.WriteLine("nodes by inner tag's attribute value:");
 
-// Создание пространства имен
-XmlNamespaceManager nsMgr = new XmlNamespaceManager(new NameTable());
-nsMgr.AddNamespace("m", mNamespace.NamespaceName);
+var nodes = document.XPathSelectElements("/persons/person[sourcedid/id = '2345']");
 
-// Чтение XPath
-XElement? authorElement = document.XPathSelectElement("/m:FictionBook/m:description/m:title-info/m:author", nsMgr);
-if (authorElement != null)
+foreach (var node in nodes)
 {
-    string author = authorElement.Value;
-    Console.WriteLine(author);
+    Console.WriteLine("---");
+    Console.WriteLine(node.ToString());
 }
 
 Console.WriteLine("DONE");
