@@ -1,1 +1,1 @@
-родительская - master
+parent - Console Core
