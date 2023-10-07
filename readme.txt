@@ -1,1 +1,1 @@
-родитель - Mvc.Core_New_Proj
+родитель - Asp.net_Core__net7
