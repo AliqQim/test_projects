@@ -1,7 +1,15 @@
+using Serilog.Formatting.Json;
+
+
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation(); ;
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+SetupLogging(builder.Services);
+
 
 var app = builder.Build();
 
@@ -25,3 +33,15 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+void SetupLogging(IServiceCollection services)
+{
+    Log.Logger = new LoggerConfiguration()  //initializing a serilog singleton
+        .WriteTo.Console(new JsonFormatter())
+        .WriteTo.File(new JsonFormatter(), "log.json")//(, rollingInterval: RollingInterval.Day, formatter: new JsonFormatter())
+        .CreateLogger();
+
+    services.AddLogging(options =>options.AddSerilog());
+    
+}
