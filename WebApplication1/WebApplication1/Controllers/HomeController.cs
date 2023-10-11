@@ -20,6 +20,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Privacy()
         {
+            _logger.LogInformation("'Privacy' action executed");
             return View();
         }
 
