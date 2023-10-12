@@ -39,7 +39,13 @@ void SetupLogging(IServiceCollection services)
 {
     Log.Logger = new LoggerConfiguration()  //initializing a serilog singleton
         .WriteTo.Console(new JsonFormatter())
-        .WriteTo.File(new JsonFormatter(), "log.json")//(, rollingInterval: RollingInterval.Day, formatter: new JsonFormatter())
+
+        //will look like "log-20231012.json", customizing if the suffix
+        //is currently not supported - https://stackoverflow.com/questions/60228026/serilog-how-to-customize-date-in-rolling-file-name
+        //but may be will be in future - https://github.com/serilog/serilog-sinks-file/pull/84
+        .WriteTo.File(new JsonFormatter(), "log-.json",     
+            rollingInterval:RollingInterval.Day)
+
         .CreateLogger();
 
     services.AddLogging(options =>options.AddSerilog());
