@@ -2,13 +2,14 @@ using Serilog.Formatting.Json;
 
 
 using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-SetupLogging(builder.Services);
+SetupLogging(builder.Services, builder.Environment.IsDevelopment());
 
 
 var app = builder.Build();
@@ -35,19 +36,33 @@ app.MapControllerRoute(
 app.Run();
 
 
-void SetupLogging(IServiceCollection services)
+void SetupLogging(IServiceCollection services, bool isDevelopment)
 {
-    Log.Logger = new LoggerConfiguration()  //initializing a serilog singleton
-        .WriteTo.Console(new JsonFormatter())
+    //initializing a serilog singleton
+    var loggingSetup = new LoggerConfiguration();  
+        
+    if (isDevelopment)
+    {
+        loggingSetup = loggingSetup.MinimumLevel.Warning()
+            .MinimumLevel.Override("Aliksoft", LogEventLevel.Information);
+    }
+    else
+    {
+        loggingSetup = loggingSetup.MinimumLevel.Error()
+            .MinimumLevel.Override("Aliksoft", LogEventLevel.Warning);
+    }
 
-        //will look like "log-20231012.json", customizing if the suffix
-        //is currently not supported - https://stackoverflow.com/questions/60228026/serilog-how-to-customize-date-in-rolling-file-name
-        //but may be will be in future - https://github.com/serilog/serilog-sinks-file/pull/84
+    //will look like "log-20231012.json", customizing if the suffix
+    //is currently not supported - https://stackoverflow.com/questions/60228026/serilog-how-to-customize-date-in-rolling-file-name
+    //but may be will be in future - https://github.com/serilog/serilog-sinks-file/pull/84
+    Log.Logger = loggingSetup.WriteTo.Console(new JsonFormatter())
         .WriteTo.File(new JsonFormatter(), "log-.json",     
             rollingInterval:RollingInterval.Day)
-
         .CreateLogger();
 
-    services.AddLogging(options =>options.AddSerilog());
-    
+    services.AddLogging(options => options.AddSerilog());
+    //serilog does not respect .net core's standard setup ()(at least for log level)
+
+    //serilog also allows setup in the app configs
+
 }

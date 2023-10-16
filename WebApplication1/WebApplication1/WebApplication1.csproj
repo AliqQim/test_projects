@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>d3006817-9af2-4f56-8f8d-2cfcaabd7124</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <RootNamespace>Aliksoft.WebApp</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

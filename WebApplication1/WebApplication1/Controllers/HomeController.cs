@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using WebApplication1.Models;
 
-namespace WebApplication1.Controllers
+namespace Aliksoft.WebApp.Controllers
 {
     public class HomeController : Controller
     {
@@ -22,6 +22,11 @@ namespace WebApplication1.Controllers
         {
             _logger.LogInformation("'Privacy' action executed");
             return View();
+        }
+
+        public IActionResult Throw()
+        {
+            throw new Exception("Test exception");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
