@@ -1,4 +1,3 @@
 ﻿
 
-Console.WriteLine("DONE");
-Console.ReadKey();
+Console.WriteLine("Hi!");
