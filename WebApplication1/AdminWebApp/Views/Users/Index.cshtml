@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Users management";
+}
+
+@model IEnumerable<DataAccessLayer.MyIdentityUser>
+
+<table>
+    <tr>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Email</td>
+            <td>
+                ссылки для редактирования<!-- Здесь добавьте ссылки или формы для редактирования и удаления пользователя -->
+            </td>
+        </tr>
+    }
+</table>
+
+<a href="@Url.Action("Create")">Add New User</a>
