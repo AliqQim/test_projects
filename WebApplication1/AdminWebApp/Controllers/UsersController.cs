@@ -24,11 +24,13 @@ namespace aliksoft.AdminWebApp.Controllers
             {
                 var userViewModel = new UserItemViewModel
                 {
-                    Email = user.Email!,    //TODO check nullability
+                    Id = user.Id,
+                    Email = user.Email!, //TODO check nullability
                     Roles = await _userManager.GetRolesAsync(user)
                 };
                 userViewModels.Add(userViewModel);
             }
+
             return View(userViewModels);
         }
 
@@ -76,6 +78,31 @@ namespace aliksoft.AdminWebApp.Controllers
 
             // Возвращаем модель обратно в представление, если есть ошибки
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                throw new Exception("Error deleting user " +  id);  //TODO bind this situation to interface (it it's ever possible)
+            }
         }
     }
 }

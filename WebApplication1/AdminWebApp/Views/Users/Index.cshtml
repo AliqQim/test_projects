@@ -16,7 +16,13 @@
             <td>@user.Email</td>
             <td>@string.Join(", ", user.Roles)</td>
             <td>
-                *action links*
+                @* TODO use constants for action and controller name *@
+                @using (Html.BeginForm("Delete", "Users", new { id = user.Id }, FormMethod.Post,
+                    null,   //TODO what about antiforgery? 
+                    new { onsubmit = "return confirm('Are you sure?');" }))
+                {
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                }
             </td>
         </tr>
     }
