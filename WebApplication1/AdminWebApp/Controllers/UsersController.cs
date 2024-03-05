@@ -17,8 +17,19 @@ namespace aliksoft.AdminWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var users = await _userManager.Users.ToListAsync();
-            return View(users);
+            var users = _userManager.Users.ToList();
+            var userViewModels = new List<UserItemViewModel>();
+
+            foreach (var user in users)
+            {
+                var userViewModel = new UserItemViewModel
+                {
+                    Email = user.Email!,    //TODO check nullability
+                    Roles = await _userManager.GetRolesAsync(user)
+                };
+                userViewModels.Add(userViewModel);
+            }
+            return View(userViewModels);
         }
 
         [HttpGet]
