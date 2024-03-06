@@ -1,4 +1,6 @@
+using aliksoft.AdminWebApp;
 using DataAccessLayer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,7 +16,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<MyIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
@@ -47,4 +52,26 @@ app.MapControllerRoute(
 
 app.MapRazorPages();    //for the Identity at least
 
+
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    await SeedRoles(scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
+}
+
+
+
+
+
 app.Run();
+
+async Task SeedRoles(RoleManager<IdentityRole> roleManager)
+{
+    string[] roleNames = { Roles.Admin, Roles.SuperAdmin };
+    foreach (var roleName in roleNames)
+    {
+        if (!await roleManager.RoleExistsAsync(roleName))
+        {
+            await roleManager.CreateAsync(new IdentityRole(roleName));
+        }
+    }
+}

@@ -38,7 +38,20 @@ namespace aliksoft.AdminWebApp.Controllers
             }
 
             var user = new MyIdentityUser { UserName = model.Email, Email = model.Email };
+
+            //TODO make something transaction-like
+
             var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (model.Role is "Admin" or "SuperAdmin")
+            {
+                await _userManager.AddToRoleAsync(user, Roles.Admin);
+            }
+
+            if (model.Role is "SuperAdmin")
+            {
+                await _userManager.AddToRoleAsync(user, Roles.SuperAdmin);
+            }
 
             if (result.Succeeded)
             {
