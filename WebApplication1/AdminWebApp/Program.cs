@@ -1,7 +1,9 @@
 using aliksoft.AdminWebApp;
 using aliksoft.DataAccessLayer;
 using DataAccessLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,7 +24,16 @@ builder.Services.AddDefaultIdentity<MyIdentityUser>(options => options.SignIn.Re
 
 
 
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews(options =>
+    {
+        var policy = new AuthorizationPolicyBuilder()
+                         .RequireAuthenticatedUser()
+                         .RequireRole("Admin")
+                         .Build();
+
+        options.Filters.Add(new AuthorizeFilter(policy));
+    })
+    .AddRazorRuntimeCompilation();
 
 
 var app = builder.Build();
