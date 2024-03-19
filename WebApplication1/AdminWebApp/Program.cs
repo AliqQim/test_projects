@@ -4,6 +4,7 @@ using DataAccessLayer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,12 +32,13 @@ builder.Services.AddControllersWithViews(options =>
                          .RequireRole("Admin")
                          .Build();
 
-        options.Filters.Add(new AuthorizeFilter(policy));
+        options.Filters.Add(new IdentityAwareAuthorizeFilter(policy));
     })
     .AddRazorRuntimeCompilation();
 
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -85,5 +87,25 @@ async Task SeedRoles(RoleManager<IdentityRole> roleManager)
         {
             await roleManager.CreateAsync(new IdentityRole(roleName));
         }
+    }
+}
+
+
+public class IdentityAwareAuthorizeFilter : AuthorizeFilter
+{
+    public IdentityAwareAuthorizeFilter(AuthorizationPolicy policy) : base(policy)
+    {
+    }
+
+    public override async Task OnAuthorizationAsync(AuthorizationFilterContext context)
+    {
+        var path = context.HttpContext.Request.Path;
+        if (path.StartsWithSegments(new PathString("/Account"), StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
+
+        await base.OnAuthorizationAsync(context);
     }
 }
