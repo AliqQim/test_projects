@@ -26,14 +26,7 @@ builder.Services.AddDefaultIdentity<MyIdentityUser>(options => options.SignIn.Re
 
 
 builder.Services.AddControllersWithViews(options =>
-    {
-        var policy = new AuthorizationPolicyBuilder()
-                         .RequireAuthenticatedUser()
-                         .RequireRole("Admin")
-                         .Build();
-
-        options.Filters.Add(new IdentityAwareAuthorizeFilter(policy));
-    })
+    options.Filters.Add(new AdminAppAuthorizeFilter()))
     .AddRazorRuntimeCompilation();
 
 
@@ -91,9 +84,13 @@ async Task SeedRoles(RoleManager<IdentityRole> roleManager)
 }
 
 
-public class IdentityAwareAuthorizeFilter : AuthorizeFilter
+public class AdminAppAuthorizeFilter : AuthorizeFilter
 {
-    public IdentityAwareAuthorizeFilter(AuthorizationPolicy policy) : base(policy)
+    public AdminAppAuthorizeFilter() : base(
+        new AuthorizationPolicyBuilder()
+         .RequireAuthenticatedUser()
+         .RequireRole("Admin")
+         .Build())
     {
     }
 
