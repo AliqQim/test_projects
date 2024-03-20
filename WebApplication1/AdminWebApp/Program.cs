@@ -66,9 +66,6 @@ await using (var scope = app.Services.CreateAsyncScope())
 }
 
 
-
-
-
 app.Run();
 
 async Task SeedRoles(RoleManager<IdentityRole> roleManager)
@@ -89,7 +86,7 @@ public class AdminAppAuthorizeFilter : AuthorizeFilter
     public AdminAppAuthorizeFilter() : base(
         new AuthorizationPolicyBuilder()
          .RequireAuthenticatedUser()
-         .RequireRole("Admin")
+         .RequireRole(Roles.Admin)
          .Build())
     {
     }
