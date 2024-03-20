@@ -100,7 +100,7 @@ public class IdentityAwareAuthorizeFilter : AuthorizeFilter
     public override async Task OnAuthorizationAsync(AuthorizationFilterContext context)
     {
         var path = context.HttpContext.Request.Path;
-        if (path.StartsWithSegments(new PathString("/Account"), StringComparison.OrdinalIgnoreCase))
+        if (path.StartsWithSegments(new PathString("/Identity"), StringComparison.OrdinalIgnoreCase))
         {
             return;
         }
