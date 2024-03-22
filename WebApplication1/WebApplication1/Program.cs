@@ -6,6 +6,10 @@ using Serilog.Events;
 using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using aliksoft.DataAccessLayer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
+
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +20,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<MyIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+
+
+builder.Services.AddDefaultIdentity<MyIdentityUser>(o => SetAuthenticationOptions(o))
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -82,5 +88,21 @@ void SetupLogging(IServiceCollection services, bool isDevelopment)
     //serilog does not respect .net core's standard setup ()(at least for log level)
 
     //serilog also allows setup in the app configs
+
+}
+
+void SetAuthenticationOptions(IdentityOptions options)
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    if (builder.Configuration["ASPNETCORE_ENVIRONMENT"] == "Development")
+    {
+        options.SignIn.RequireConfirmedAccount = true;
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 1;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequiredUniqueChars = 0;
+    }
 
 }
