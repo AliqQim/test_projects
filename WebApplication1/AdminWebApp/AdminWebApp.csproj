@@ -33,7 +33,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\MainPageText\Edit.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Users\Create.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\MainPageText\Edit.cshtml" />
   </ItemGroup>
 
 </Project>

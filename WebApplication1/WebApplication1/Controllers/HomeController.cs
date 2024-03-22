@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using aliksoft.DataAccessLayer;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using aliksoft.DataAccessLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
 
 namespace Aliksoft.WebApp.Controllers
@@ -13,9 +16,11 @@ namespace Aliksoft.WebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public record IndexPageVM(string Content);
+        public async Task<IActionResult> IndexAsync([FromServices] ApplicationDbContext dbContext)
         {
-            return View();
+            string mainPageText = (await dbContext.Contents.SingleAsync(x => x.PageId == PageId.Main)).Content;
+            return View(new IndexPageVM(mainPageText));
         }
 
         public IActionResult Privacy()

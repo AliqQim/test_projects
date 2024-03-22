@@ -1,0 +1,26 @@
+﻿@model aliksoft.AdminWebApp.Controllers.MainPageTextViewModel
+
+@{
+    ViewBag.Title = "MaiN page text edittinG";
+    Layout = "_Layout";
+}
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div >
+        <label asp-for="Content" ></label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <div >
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

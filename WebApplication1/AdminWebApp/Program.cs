@@ -1,4 +1,5 @@
 using aliksoft.AdminWebApp;
+using aliksoft.DataAccessLayer;
 using DataAccessLayer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -48,7 +49,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Users}/{action=Index}/{id?}");
+    pattern: "{controller=MainPageText}/{action=Edit}/{id?}");
 
 app.MapRazorPages();    //for the Identity at least
 
