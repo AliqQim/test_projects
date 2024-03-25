@@ -56,9 +56,14 @@ namespace aliksoft.AdminWebApp.Controllers
 
             var result = await _userManager.CreateAsync(user, model.Password);
             
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                return RedirectToAction("Index");
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                return View(model);
             }
 
             if (model.Role is "Admin" or "SuperAdmin")
@@ -71,15 +76,8 @@ namespace aliksoft.AdminWebApp.Controllers
                 await _userManager.AddToRoleAsync(user, Roles.SuperAdmin);
             }
 
-            
+            return RedirectToAction("Index");
 
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-
-            // Возвращаем модель обратно в представление, если есть ошибки
-            return View(model);
         }
 
         [HttpPost]
