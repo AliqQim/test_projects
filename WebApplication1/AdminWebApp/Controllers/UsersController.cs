@@ -55,6 +55,11 @@ namespace aliksoft.AdminWebApp.Controllers
             //TODO make something transaction-like
 
             var result = await _userManager.CreateAsync(user, model.Password);
+            
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
 
             if (model.Role is "Admin" or "SuperAdmin")
             {
@@ -66,10 +71,7 @@ namespace aliksoft.AdminWebApp.Controllers
                 await _userManager.AddToRoleAsync(user, Roles.SuperAdmin);
             }
 
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index");
-            }
+            
 
             foreach (var error in result.Errors)
             {
