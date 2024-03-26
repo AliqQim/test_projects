@@ -21,8 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 
-
-builder.Services.AddDefaultIdentity<MyIdentityUser>(o => SetAuthenticationOptions(o))
+builder.Services.AddDefaultIdentity<MyIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -91,18 +90,3 @@ void SetupLogging(IServiceCollection services, bool isDevelopment)
 
 }
 
-void SetAuthenticationOptions(IdentityOptions options)
-{
-    options.SignIn.RequireConfirmedAccount = true;
-    if (builder.Configuration["ASPNETCORE_ENVIRONMENT"] == "Development")
-    {
-        options.SignIn.RequireConfirmedAccount = true;
-        options.Password.RequireDigit = false;
-        options.Password.RequiredLength = 1;
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUppercase = false;
-        options.Password.RequireLowercase = false;
-        options.Password.RequiredUniqueChars = 0;
-    }
-
-}

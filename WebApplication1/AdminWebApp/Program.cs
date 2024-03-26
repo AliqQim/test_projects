@@ -19,7 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<MyIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<MyIdentityUser>(o => SetAuthenticationOptions(o, builder))
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -80,6 +80,21 @@ async Task SeedRoles(RoleManager<IdentityRole> roleManager)
     }
 }
 
+static void SetAuthenticationOptions(IdentityOptions options, IHostApplicationBuilder builder)
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    if (builder.Configuration["ASPNETCORE_ENVIRONMENT"] == "Development")
+    {
+        options.SignIn.RequireConfirmedAccount = true;
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 1;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequiredUniqueChars = 0;
+    }
+
+}
 
 public class AdminAppAuthorizeFilter : AuthorizeFilter
 {
@@ -99,7 +114,7 @@ public class AdminAppAuthorizeFilter : AuthorizeFilter
             return;
         }
 
-
         await base.OnAuthorizationAsync(context);
     }
 }
+
