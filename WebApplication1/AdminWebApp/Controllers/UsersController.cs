@@ -1,11 +1,13 @@
 ﻿using aliksoft.AdminWebApp.Models;
 using DataAccessLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace aliksoft.AdminWebApp.Controllers
 {
+    [Authorize(RolePolicies.SuperAdminOnly)]
     public class UsersController : Controller
     {
         private readonly UserManager<MyIdentityUser> _userManager;

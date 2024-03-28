@@ -23,7 +23,10 @@ builder.Services.AddDefaultIdentity<MyIdentityUser>(o => SetAuthenticationOption
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(RolePolicies.SuperAdminOnly, policy => policy.RequireRole(Roles.SuperAdmin));
+});
 
 builder.Services.AddControllersWithViews(options =>
     options.Filters.Add(new AdminAppAuthorizeFilter()))
