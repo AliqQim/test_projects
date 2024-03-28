@@ -82,10 +82,10 @@ async Task SeedRoles(RoleManager<IdentityRole> roleManager)
 
 static void SetAuthenticationOptions(IdentityOptions options, IHostApplicationBuilder builder)
 {
-    options.SignIn.RequireConfirmedAccount = true;
+    options.SignIn.RequireConfirmedEmail = false;
     if (builder.Configuration["ASPNETCORE_ENVIRONMENT"] == "Development")
     {
-        options.SignIn.RequireConfirmedAccount = true;
+        
         options.Password.RequireDigit = false;
         options.Password.RequiredLength = 1;
         options.Password.RequireNonAlphanumeric = false;
