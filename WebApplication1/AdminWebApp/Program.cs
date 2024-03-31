@@ -1,7 +1,10 @@
 using aliksoft.AdminWebApp;
 using aliksoft.DataAccessLayer;
 using DataAccessLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,16 +19,22 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<MyIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<MyIdentityUser>(o => SetAuthenticationOptions(o, builder))
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(RolePolicies.SuperAdminOnly, policy => policy.RequireRole(Roles.SuperAdmin));
+});
 
-
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews(options =>
+    options.Filters.Add(new AdminAppAuthorizeFilter()))
+    .AddRazorRuntimeCompilation();
 
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -47,9 +56,17 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+const string DefaultController = "MainPageText";
+const string DefaultAction = "Edit";
+
+
+app.MapControllerRoute(
+    name: "defaultUnderArea",
+    pattern: $"{{area:exists}}/{{controller={DefaultController}}}/{{action={DefaultAction}}}/{{id?}}");
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=MainPageText}/{action=Edit}/{id?}");
+    pattern: $"{{controller={DefaultController}}}/{{action={DefaultAction}}}/{{id?}}");
 
 app.MapRazorPages();    //for the Identity at least
 
@@ -58,9 +75,6 @@ await using (var scope = app.Services.CreateAsyncScope())
 {
     await SeedRoles(scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
 }
-
-
-
 
 
 app.Run();
@@ -76,3 +90,42 @@ async Task SeedRoles(RoleManager<IdentityRole> roleManager)
         }
     }
 }
+
+static void SetAuthenticationOptions(IdentityOptions options, IHostApplicationBuilder builder)
+{
+    options.SignIn.RequireConfirmedEmail = false;
+    if (builder.Configuration["ASPNETCORE_ENVIRONMENT"] == "Development")
+    {
+        
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 1;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequiredUniqueChars = 0;
+    }
+
+}
+
+public class AdminAppAuthorizeFilter : AuthorizeFilter
+{
+    public AdminAppAuthorizeFilter() : base(
+        new AuthorizationPolicyBuilder()
+         .RequireAuthenticatedUser()
+         .RequireRole(Roles.Admin)
+         .Build())
+    {
+    }
+
+    public override async Task OnAuthorizationAsync(AuthorizationFilterContext context)
+    {
+        var path = context.HttpContext.Request.Path;
+        if (path.StartsWithSegments(new PathString("/Identity"), StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
+        await base.OnAuthorizationAsync(context);
+    }
+}
+

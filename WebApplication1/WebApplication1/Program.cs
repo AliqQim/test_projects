@@ -6,6 +6,10 @@ using Serilog.Events;
 using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using aliksoft.DataAccessLayer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
+
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +20,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<MyIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+
+builder.Services.AddDefaultIdentity<MyIdentityUser>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+        options.SignIn.RequireConfirmedEmail = false;
+
+    })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -84,3 +94,4 @@ void SetupLogging(IServiceCollection services, bool isDevelopment)
     //serilog also allows setup in the app configs
 
 }
+

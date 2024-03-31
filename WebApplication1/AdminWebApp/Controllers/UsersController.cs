@@ -1,11 +1,13 @@
 ﻿using aliksoft.AdminWebApp.Models;
 using DataAccessLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace aliksoft.AdminWebApp.Controllers
 {
+    [Authorize(RolePolicies.SuperAdminOnly)]
     public class UsersController : Controller
     {
         private readonly UserManager<MyIdentityUser> _userManager;
@@ -55,6 +57,16 @@ namespace aliksoft.AdminWebApp.Controllers
             //TODO make something transaction-like
 
             var result = await _userManager.CreateAsync(user, model.Password);
+            
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                return View(model);
+            }
 
             if (model.Role is "Admin" or "SuperAdmin")
             {
@@ -66,18 +78,8 @@ namespace aliksoft.AdminWebApp.Controllers
                 await _userManager.AddToRoleAsync(user, Roles.SuperAdmin);
             }
 
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index");
-            }
+            return RedirectToAction("Index");
 
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-
-            // Возвращаем модель обратно в представление, если есть ошибки
-            return View(model);
         }
 
         [HttpPost]

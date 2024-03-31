@@ -6,4 +6,9 @@
         public const string Admin = "Admin";
         public const string SuperAdmin = "SuperAdmin";
     }
+
+    public class RolePolicies
+    {
+        public const string SuperAdminOnly = "SuperAdminOnly";
+    }
 }
