@@ -1,6 +1,7 @@
 ﻿using CoreConsoleApp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Channels;
 
@@ -16,12 +17,9 @@ using (var context = MyContextFactory.CreateContext())
         context.Persons.Add(new Person
         {
             Name = "петя",
-            Age = 22,
+            Age = 20,
             Job = new Job { Name = "работа 1" },
-            Zamorochkas = new List<Zamorochka> {
-                            new Zamorochka { Name = "тупо шутит" },
-                            new Zamorochka { Name = "безалаберный" },
-                        }
+            
 
         });
         context.Persons.Add(new Person
@@ -29,27 +27,18 @@ using (var context = MyContextFactory.CreateContext())
             Name = "Вася",
             Age = 23,
             Job = new Job { Name = "работа 2" },
-            Zamorochkas = new List<Zamorochka> { new Zamorochka { Name = "далбич" } }
+            
         });
 
         context.SaveChanges();
     }
 
+    Console.WriteLine("Deleting:");
+    var count = context.Persons
+                                .Where(p => p.Age < 21)
+                                .DeleteFromQuery();
 
-    Console.WriteLine(context.Persons.Count());
-
-
-
-
-    foreach (var p in context.Persons)
-    {
-        Console.WriteLine($"{p.Name} {p.Age}");
-    }
-
-    var persons = context.Persons.Include(x => x.Zamorochkas);
-
-    string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
-    Console.WriteLine(firstzamorochkaName);
+    Console.WriteLine($"{count} persons have been deleted.");
 
 
 }
@@ -66,6 +55,7 @@ public class MyContextFactory : IDesignTimeDbContextFactory<MyContext>
     public static MyContext CreateContext()
     {
         var options = new DbContextOptionsBuilder<MyContext>()
+                        .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
                         .UseSqlServer($"Data Source=(localdb)\\mssqllocaldb;Initial Catalog=MyContext;Integrated Security=True;MultipleActiveResultSets=True")
                         .Options;
         var context = new MyContext(options);
