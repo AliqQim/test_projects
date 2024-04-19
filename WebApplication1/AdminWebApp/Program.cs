@@ -1,10 +1,8 @@
 using aliksoft.AdminWebApp;
 using aliksoft.DataAccessLayer;
+using aliksoft.WebCommon;
 using DataAccessLayer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,48 +11,28 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetSection("ConnectionStrings")["DefaultConnection"] ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+Bootstrap.SetupCommonServices(builder);
 
-builder.Services.AddDefaultIdentity<MyIdentityUser>(o => SetAuthenticationOptions(o, builder))
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+Bootstrap.SetupLogging(builder.Services, builder.Environment.IsDevelopment());
 
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(RolePolicies.SuperAdminOnly, policy => policy.RequireRole(Roles.SuperAdmin));
 });
 
-builder.Services.AddControllersWithViews(options =>
-    options.Filters.Add(new AdminAppAuthorizeFilter()))
-    .AddRazorRuntimeCompilation();
+
+var mvcBuilder = builder.Services.AddControllersWithViews(options =>
+    options.Filters.Add(new AdminAppAuthorizeFilter()));
+
+if (builder.Environment.IsDevelopment())
+{
+    mvcBuilder.AddRazorRuntimeCompilation();
+}
 
 
 var app = builder.Build();
 
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseMigrationsEndPoint();
-}
-else
-{
-    //app.UseExceptionHandler("/Home/Error");   //TODO make prod error handler
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
+Bootstrap.SetupApp(app);
 
 const string DefaultController = "MainPageText";
 const string DefaultAction = "Edit";
@@ -88,44 +66,6 @@ async Task SeedRoles(RoleManager<IdentityRole> roleManager)
         {
             await roleManager.CreateAsync(new IdentityRole(roleName));
         }
-    }
-}
-
-static void SetAuthenticationOptions(IdentityOptions options, IHostApplicationBuilder builder)
-{
-    options.SignIn.RequireConfirmedEmail = false;
-    if (builder.Configuration["ASPNETCORE_ENVIRONMENT"] == "Development")
-    {
-        
-        options.Password.RequireDigit = false;
-        options.Password.RequiredLength = 1;
-        options.Password.RequireNonAlphanumeric = false;
-        options.Password.RequireUppercase = false;
-        options.Password.RequireLowercase = false;
-        options.Password.RequiredUniqueChars = 0;
-    }
-
-}
-
-public class AdminAppAuthorizeFilter : AuthorizeFilter
-{
-    public AdminAppAuthorizeFilter() : base(
-        new AuthorizationPolicyBuilder()
-         .RequireAuthenticatedUser()
-         .RequireRole(Roles.Admin)
-         .Build())
-    {
-    }
-
-    public override async Task OnAuthorizationAsync(AuthorizationFilterContext context)
-    {
-        var path = context.HttpContext.Request.Path;
-        if (path.StartsWithSegments(new PathString("/Identity"), StringComparison.OrdinalIgnoreCase))
-        {
-            return;
-        }
-
-        await base.OnAuthorizationAsync(context);
     }
 }
 

@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
+    <ProjectReference Include="..\WebCommon\WebCommon.csproj" />
   </ItemGroup>
 
   <ItemGroup>
