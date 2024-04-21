@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Json;
@@ -20,12 +21,36 @@ public static class Bootstrap
             options.UseSqlServer(connectionString));
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        builder.Services.AddDefaultIdentity<MyIdentityUser>(o => SetAuthenticationOptions(o, builder))
-            .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
-            
+        builder.Services.AddAuthentication().AddGoogle();
+
+        AddAuthorizationAndIdentity(builder);
+
     }
 
+    private static void AddAuthorizationAndIdentity(WebApplicationBuilder builder)
+    {
+        //the code was taken from the "AddDefaultIdentity" method because we needed to connect google auth
+        builder.Services.AddAuthentication(o =>
+            {
+                o.DefaultScheme = IdentityConstants.ApplicationScheme;
+                o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            })
+            .AddGoogle()
+            .AddIdentityCookies(_ => { });
+            
+
+        builder.Services.AddIdentityCore<MyIdentityUser>(o =>
+        {
+            o.Stores.MaxLengthForKeys = 128;
+            SetAuthenticationOptions(o, builder);
+        })
+        .AddDefaultUI()
+        .AddDefaultTokenProviders();
+
+        builder.Services.AddDefaultIdentity<MyIdentityUser>(o => SetAuthenticationOptions(o, builder))
+                    .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
+    }
 
     static void SetAuthenticationOptions(IdentityOptions options, IHostApplicationBuilder builder)
     {
@@ -40,6 +65,7 @@ public static class Bootstrap
             options.Password.RequireLowercase = false;
             options.Password.RequiredUniqueChars = 0;
         }
+
 
     }
 
