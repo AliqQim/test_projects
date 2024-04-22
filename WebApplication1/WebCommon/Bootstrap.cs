@@ -21,7 +21,11 @@ public static class Bootstrap
             options.UseSqlServer(connectionString));
         builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-        builder.Services.AddAuthentication().AddGoogle();
+        builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+        {
+            googleOptions.ClientId = "675543448554-f3ln8vutg9k4me6qqmmphgb0oien5eqg.apps.googleusercontent.com";
+            googleOptions.ClientSecret = "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";
+        });
 
         AddAuthorizationAndIdentity(builder);
 
