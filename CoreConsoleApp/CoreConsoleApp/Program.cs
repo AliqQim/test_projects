@@ -5,6 +5,9 @@ var a = new A { Fld1 = 222, LinkToCObj = new C1 { SomeFld = "Uraa!" } };
 
 
 var config = new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()));
+
+config.AssertConfigurationIsValid();    //exception here too which is very good
+
 var mapper = config.CreateMapper();
 
 
