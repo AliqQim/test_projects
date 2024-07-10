@@ -10,6 +10,7 @@ builder.Services.TryAddSingleton<ProfileService>();
 var app = builder.Build();
 app.UseRouting();
 
+#pragma warning disable ASP0014 // Suggest using top level route registrations
 app.UseEndpoints(endpoints => {
     endpoints.UseSoapEndpoint<ProfileService>(
         path: "/ProfileService",
@@ -17,5 +18,6 @@ app.UseEndpoints(endpoints => {
         serializer: SoapSerializer.DataContractSerializer,
         caseInsensitivePath: true);
 });
+#pragma warning restore ASP0014 // Suggest using top level route registrations
 
 app.Run();
