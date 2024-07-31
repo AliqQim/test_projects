@@ -39,6 +39,25 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "OpenGetAction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7285/weatherforecast",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7285",
+					"path": [
+						"weatherforecast"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
