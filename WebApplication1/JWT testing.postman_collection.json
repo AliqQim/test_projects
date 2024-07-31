@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "9ab4ebda-1cd4-46c4-b9de-c1cd6be0e82f",
+		"name": "JWT testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17265756"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "Alik",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Kim",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:7285/auth",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7285",
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
