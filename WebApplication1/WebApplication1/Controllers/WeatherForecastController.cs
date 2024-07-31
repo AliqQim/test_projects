@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication1.Controllers
@@ -29,5 +30,9 @@ namespace WebApplication1.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("secured")]
+        [Authorize]
+        public string GetSecuredInfo() => "Alio is coolio";
     }
 }
