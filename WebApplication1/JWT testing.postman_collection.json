@@ -27,14 +27,15 @@
 					]
 				},
 				"url": {
-					"raw": "https://localhost:7285/auth",
+					"raw": "https://localhost:7285/auth/login",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
 					"port": "7285",
 					"path": [
-						"auth"
+						"auth",
+						"login"
 					]
 				}
 			},
