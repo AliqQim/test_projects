@@ -8,23 +8,20 @@
 	"item": [
 		{
 			"name": "Auth",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "Alik",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "Kim",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"test\", \r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
 					"raw": "https://localhost:7285/auth/login",
