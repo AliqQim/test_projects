@@ -56,6 +56,36 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "SecuredAction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InRlc3QiLCJuYmYiOjE3MjI3ODI1MDUsImV4cCI6MTcyMjc4NjEwNSwiaWF0IjoxNzIyNzgyNTA1fQ.BjBCqpc3Eq70d2_69If_JyWmDrpuD0LeqRDmw8bJ5zg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7285/weatherforecast/secured",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7285",
+					"path": [
+						"weatherforecast",
+						"secured"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
