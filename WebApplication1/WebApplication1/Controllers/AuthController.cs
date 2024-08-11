@@ -24,7 +24,6 @@ namespace WebApplication1.Controllers
                 return Unauthorized();
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("аа секретный ключ ниифига никто не знает не ломанет!");
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -32,7 +31,7 @@ namespace WebApplication1.Controllers
                 new Claim(ClaimTypes.Name, login.Username)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(KeysHolder.KeyForSignup, SecurityAlgorithms.RsaSha256)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);

@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -8,7 +9,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-var secretKey = Encoding.ASCII.GetBytes("аа секретный ключ ниифига никто не знает не ломанет!");
 
 builder.Services.AddAuthentication(x =>
 {
@@ -17,12 +17,11 @@ builder.Services.AddAuthentication(x =>
 })
 .AddJwtBearer(x =>
 {
-    x.RequireHttpsMetadata = false;
-    x.SaveToken = true;
+    x.SaveToken = true; //so we can read the token in further request handling via HttpContext.GetTokenAsync("access_token")
     x.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(secretKey),
+        ValidateIssuerSigningKey = true,    //the sign needs to be validated (otherwise - there would be no security, soo pretty strange setting with default "false")
+        IssuerSigningKey = KeysHolder.KeyForAuthentication,
         ValidateIssuer = false,
         ValidateAudience = false
     };
@@ -42,3 +41,19 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+//i think it's more straight to use symmetric encryption - see previous commits
+public class KeysHolder
+{
+    static KeysHolder()
+    {
+        using var rsa = new RSACryptoServiceProvider(2048);
+        KeyForSignup = new RsaSecurityKey(rsa.ExportParameters(true));
+        KeyForAuthentication = new RsaSecurityKey(rsa.ExportParameters(false));
+
+    }
+
+    public static RsaSecurityKey KeyForSignup { get; }
+    public static RsaSecurityKey KeyForAuthentication { get; }
+}
