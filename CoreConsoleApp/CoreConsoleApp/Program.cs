@@ -49,7 +49,8 @@ using (var context = MyContextFactory.CreateContext())
 {
 
     var p = new Person { Id = 1 };
-    
+    //var p = await context.Persons.FirstAsync(x => x.Id == 1); //Same result
+
     p.Name = "ZZZ"; //this won;t go to db
 
     context.Attach(p);
