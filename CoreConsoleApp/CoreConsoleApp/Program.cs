@@ -1,12 +1,14 @@
 ﻿using CoreConsoleApp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 using System.Threading.Channels;
 
 using (var context = MyContextFactory.CreateContext())
 {
-    bool reset = true;
+    bool reset = false;
 
     if (reset)
     {
@@ -33,25 +35,28 @@ using (var context = MyContextFactory.CreateContext())
         });
 
         context.SaveChanges();
+
     }
+ 
+}
 
+using (var context = MyContextFactory.CreateContext())
+{
+    Console.WriteLine(JsonConvert.SerializeObject(await context.Persons.ToListAsync()));
+}
 
-    Console.WriteLine(context.Persons.Count());
+using (var context = MyContextFactory.CreateContext())
+{
 
+    var p = new Person { Id = 1 };
+    
+    p.Name = "ZZZ"; //this won;t go to db
 
+    context.Attach(p);
+    
+    p.Age = 777;    //this will go to DB
 
-
-    foreach (var p in context.Persons)
-    {
-        Console.WriteLine($"{p.Name} {p.Age}");
-    }
-
-    var persons = context.Persons.Include(x => x.Zamorochkas);
-
-    string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
-    Console.WriteLine(firstzamorochkaName);
-
-
+    context.SaveChanges();
 }
 
 Console.WriteLine("DONE");
