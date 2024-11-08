@@ -1,12 +1,13 @@
 ﻿using CoreConsoleApp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Channels;
 
 using (var context = MyContextFactory.CreateContext())
 {
-    bool reset = true;
+    bool reset = false;
 
     if (reset)
     {
@@ -39,17 +40,17 @@ using (var context = MyContextFactory.CreateContext())
     Console.WriteLine(context.Persons.Count());
 
 
+    var u1 = await context.Persons.SingleAsync(x=>x.Name == "петя");
 
+    u1.Age = 666;
 
-    foreach (var p in context.Persons)
-    {
-        Console.WriteLine($"{p.Name} {p.Age}");
-    }
+    Console.WriteLine(JsonConvert.SerializeObject(await context.Persons.ToListAsync()));
+    //in this case петя has age of 666, i.e. the existing object being tracked is used
 
-    var persons = context.Persons.Include(x => x.Zamorochkas);
-
-    string? firstzamorochkaName = persons.First().Zamorochkas?.First()?.Name;
-    Console.WriteLine(firstzamorochkaName);
+    Console.WriteLine(JsonConvert.SerializeObject(await context.Persons
+        .AsNoTracking()
+        .ToListAsync()));
+    //here петя's age is 22, it's just read from DB
 
 
 }

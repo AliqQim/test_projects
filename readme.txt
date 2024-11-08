@@ -1,1 +1,1 @@
-родительская - Console_Core
+parent - EF_Core__net8__ConfigurationAndMigrations__v4
