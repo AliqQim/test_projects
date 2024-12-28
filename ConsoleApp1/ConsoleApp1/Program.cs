@@ -33,7 +33,7 @@ namespace ConsoleApp1
         {
             try
             {
-                f1();
+                f15();
             }
             catch (Exception e)
             {
@@ -41,6 +41,11 @@ namespace ConsoleApp1
                 Console.WriteLine(e.StackTrace);
                 throw;
             }
+        }
+
+        static void f15()
+        {
+            f1();
         }
     }
 }
