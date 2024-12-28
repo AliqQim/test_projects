@@ -20,7 +20,7 @@ void f2()
 {
     try
     {
-        f1();
+        f15();
     }
     catch (Exception e)
     {
@@ -28,4 +28,9 @@ void f2()
         Console.WriteLine(e.StackTrace);
         throw;
     }
+}
+
+void f15()
+{
+    f1();
 }
