@@ -27,10 +27,11 @@ class BItem : Item
 
 class B<TItem> : IA where TItem: new()
 {
-    public Task<IEnumerable<Item>> GetCollection()
+    public async Task<IEnumerable<Item>> GetCollection()
     {
         var res = new List<TItem>{new TItem()};
+        await Task.Delay(1);
 
-        return Task.FromResult((IEnumerable<Item>)res);
+        return (IEnumerable<Item>)res;
     }
 }
