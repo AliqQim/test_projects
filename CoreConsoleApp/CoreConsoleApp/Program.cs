@@ -2,8 +2,8 @@
 var a = new B<Item>();
 var b = new B<BItem>();
 
-var resA = a.GetCollection();
-var resB = b.GetCollection();
+var resA = await a.GetCollection();
+var resB = await b.GetCollection();
 
 
 Console.WriteLine("Hi!");
@@ -17,7 +17,7 @@ interface IA
 {
 
 
-    IEnumerable<Item> GetCollection();
+    Task<IEnumerable<Item>> GetCollection();
 }
 
 
@@ -27,10 +27,10 @@ class BItem : Item
 
 class B<TItem> : IA where TItem: new()
 {
-    public IEnumerable<Item> GetCollection()
+    public Task<IEnumerable<Item>> GetCollection()
     {
         var res = new List<TItem>{new TItem()};
 
-        return (IEnumerable<Item>)res;
+        return Task.FromResult((IEnumerable<Item>)res);
     }
 }
