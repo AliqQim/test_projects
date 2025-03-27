@@ -17,7 +17,7 @@ interface IA
 {
 
 
-    ICollection<Item> GetCollection();
+    IEnumerable<Item> GetCollection();
 }
 
 
@@ -27,17 +27,10 @@ class BItem : Item
 
 class B<TItem> : IA where TItem: new()
 {
-    public ICollection<Item> GetCollection()
+    public IEnumerable<Item> GetCollection()
     {
         var res = new List<TItem>{new TItem()};
 
-        if (typeof(TItem) == typeof(Item))
-        {
-            return (ICollection<Item>)res;  //to avoid unnecessary list copying
-        }
-
-        return ((IEnumerable<Item>)res).ToList();
-
-        
+        return (IEnumerable<Item>)res;
     }
 }
