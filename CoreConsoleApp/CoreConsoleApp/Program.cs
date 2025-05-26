@@ -1,5 +1,8 @@
 ﻿using Mapster;
 
+
+TypeAdapterConfig.GlobalSettings.RequireDestinationMemberSource = true;
+
 var person = new Person { Name = "Alice", Age = 30 };
 
 var dto = person.Adapt<PersonDto>();
@@ -13,7 +16,6 @@ public record Person
     public int Age { get; set; }
 }
 
-// Целевой класс
 public record PersonDto
 {
     public string? Name { get; set; }
