@@ -1,1 +1,1 @@
-родительская - master
+родительская - Console_Core__v3_dotnet8
