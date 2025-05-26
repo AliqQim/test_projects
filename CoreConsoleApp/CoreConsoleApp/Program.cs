@@ -19,4 +19,7 @@ public record Person
 public record PersonDto
 {
     public string? Name { get; set; }
+
+    public int MyProperty { get; init; }
+
 }
