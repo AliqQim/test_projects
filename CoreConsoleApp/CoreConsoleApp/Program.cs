@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using Dtos;
+using Mapster;
 using System.Reflection;
 
 
@@ -18,7 +19,7 @@ public class MyRegister : ICodeGenerationRegister
     public void Register(CodeGenerationConfig config)
     {
         config.AdaptTo("[name]Dto")
-            .ForAllTypesInNamespace(Assembly.GetExecutingAssembly(), "Sample.CodeGen.Domains");
+            .ForAllTypesInNamespace(Assembly.GetExecutingAssembly(), "Dtos");
 
         config.GenerateMapper("[name]Mapper")
                 .ForType<Person>();
@@ -26,16 +27,18 @@ public class MyRegister : ICodeGenerationRegister
     }
 }
 
-public record Person
-{
-    public string? Name { get; set; }
-    public int Age { get; set; }
-}
+namespace Dtos{
+    public record Person
+    {
+        public string? Name { get; set; }
+        public int Age { get; set; }
+    }
 
-public record PersonDto
-{
-    public string? Name { get; set; }
+    public record PersonDto
+    {
+        public string? Name { get; set; }
 
-    public int MyProperty { get; init; }
+        public int MyProperty { get; init; }
 
+    }
 }
