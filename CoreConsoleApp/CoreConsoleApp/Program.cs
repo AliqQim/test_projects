@@ -1,7 +1,10 @@
 ﻿using Mapster;
+using System.Reflection;
 
 
-TypeAdapterConfig.GlobalSettings.RequireDestinationMemberSource = true;
+
+
+
 
 var person = new Person { Name = "Alice", Age = 30 };
 
@@ -9,6 +12,19 @@ var dto = person.Adapt<PersonDto>();
 
 Console.WriteLine($"Hello, {dto}!");
 
+
+public class MyRegister : ICodeGenerationRegister
+{
+    public void Register(CodeGenerationConfig config)
+    {
+        config.AdaptTo("[name]Dto")
+            .ForAllTypesInNamespace(Assembly.GetExecutingAssembly(), "Sample.CodeGen.Domains");
+
+        config.GenerateMapper("[name]Mapper")
+                .ForType<Person>();
+
+    }
+}
 
 public record Person
 {
