@@ -28,8 +28,12 @@ using (var context = MyContextFactory.CreateContext())
         context.SaveChanges();
     }
 
+    var request = context.Users.Include(x => x.Orders);
 
-    Console.WriteLine(JsonConvert.SerializeObject(await context.Users.ToListAsync()));
+    Console.WriteLine(JsonConvert.SerializeObject(await request.ToListAsync(), new JsonSerializerSettings
+    {
+        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+    }));
 }
 
 Console.WriteLine("DONE");
