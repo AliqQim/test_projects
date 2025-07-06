@@ -6,33 +6,21 @@ using System.Text;
 
 namespace CoreConsoleApp
 {
-    public class Person
+
+    public class User
     {
         public int Id { get; set; }
-
         public string Name { get; set; } = null!;
-        public int Age { get; set; }
-
-        public List<Zamorochka> Zamorochkas { get; set; } = null!;
-
-        public Job Job { get; set; } = null!;
-
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 
-    public class Zamorochka
+    public class Order
     {
-        [Key]
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
+        public string Item { get; set; } = null!;
+        public int UserId { get; set; }
+        public User User { get; set; } = null!;
     }
-
-    public class Job
-    {
-        [Key]
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-    }
-
 
 
     public class MyContext : DbContext
@@ -42,11 +30,13 @@ namespace CoreConsoleApp
         {
         }
 
-        public virtual DbSet<Person> Persons { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Order> Orders { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new PersonConfiguration());
+            modelBuilder.Entity<User>().ToTable("Users", "dbo");    //seems like no version without explicit table name
+            modelBuilder.Entity<Order>().ToTable("Orders", "other");
         }
     }
 }
