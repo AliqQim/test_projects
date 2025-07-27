@@ -1,0 +1,15 @@
+﻿<button id="ajaxButton">Get Message</button>
+<div id="result" style="margin-top:10px; color:blue;"></div>
+
+<script>
+    document.getElementById('ajaxButton').addEventListener('click', function () {
+        fetch('/weatherforecast')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('result').textContent = data;
+            })
+            .catch(error => {
+                document.getElementById('result').textContent = 'Error: ' + error;
+            });
+    });
+</script>
