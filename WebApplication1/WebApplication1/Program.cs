@@ -21,8 +21,8 @@ builder.Services.AddAuthentication(options =>
 .AddCookie()
 .AddGoogle(options =>
 {
-    options.ClientId = "AAA";
-    options.ClientSecret = "BBB";
+    options.ClientId = builder.Configuration["Authentication:Google:ClientId"] ?? throw new ArgumentNullException();
+    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"] ?? throw new ArgumentNullException();
     options.SaveTokens = true;
     options.Scope.Add("openid");
     options.Scope.Add("profile");
