@@ -10,7 +10,7 @@ namespace WebApplication1.Controllers;
 public class AuthController : ControllerBase
 {
     [HttpGet("login-google")]
-    public IActionResult LoginWithGoogle(string returnUrl = "/")
+    public IActionResult LoginWithGoogle(string returnUrl = "/app")
     {
         var props = new AuthenticationProperties { RedirectUri = returnUrl };
         return Challenge(props, GoogleDefaults.AuthenticationScheme);
