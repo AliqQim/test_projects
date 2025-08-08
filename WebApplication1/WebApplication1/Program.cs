@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 
@@ -21,12 +22,19 @@ builder.Services.AddAuthentication(options =>
     options.Scope.Add("openid");
     options.Scope.Add("profile");
     options.Scope.Add("email");
+
+    //options.Events.OnCreatingTicket = ctx =>
+    //{
+    //    var raw = ctx.User.ToString();  //this is how we can see raw data from provider (all claims)
+
+    //    return Task.CompletedTask;
+    //};
+
+    options.ClaimActions.MapJsonKey("picture", "picture");
 });
 
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
 
