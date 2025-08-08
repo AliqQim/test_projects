@@ -1,11 +1,24 @@
 ﻿@if (ViewBag.IsAuthenticated)
 {
-    <img src="@ViewBag.PictureUrl" alt="Google Photo" style="border-radius:50%; width:48px; height:48px;" />
+    if (ViewBag.PictureUrl != null)
+    {
+        <img src="@ViewBag.PictureUrl
+        " alt="Google Photo" style="border-radius:50%; width:48px; height:48px;" />
+    }
+    <div>@ViewBag.Name</div>
+
     <a href="/auth/logout" style="margin-left:15px;">Logout</a>
 }
 else
 {
-    <a href="/auth/login-google" style="margin-left:15px;">Login</a>
+    <a href="/auth/login-google" style="margin-left:15px;">Login by google</a>
+    <br />
+    <span>Local login:</span>
+    <form method="post" action="/auth/login-custom" style="margin-top:10px;">
+        <input type="text" name="username" placeholder="Login" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Log in</button>
+    </form>
 }
 
 <button id="ajaxButton">Get Message</button>
