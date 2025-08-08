@@ -30,7 +30,8 @@ builder.Services.AddAuthentication(options =>
     //    return Task.CompletedTask;
     //};
 
-    options.ClaimActions.MapJsonKey("picture", "picture");
+    options.ClaimActions.MapJsonKey("picture", "picture");  //by default only a set of standart OIDC(?) claims are saved,
+                                                            //to add other claims we need to do it manually like this
 });
 
 
