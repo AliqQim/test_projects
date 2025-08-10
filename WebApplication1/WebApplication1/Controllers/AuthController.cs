@@ -21,9 +21,7 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Logout()
     {
 
-        //different cheme names here is okay , because google scheme is for our authentication,
-        //but at the end we use cookies to authenticate (google info is stored there)
-        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await HttpContext.SignOutAsync();
         return Redirect("/app");
     }
 
@@ -39,8 +37,8 @@ public class AuthController : ControllerBase
             };
 
             //the one who created a ClaimsIdentity - sets it's scheme of creation, which then is a part of the principal
-            //object which would be serialized in cookie
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            //object which would be serialized in cookie (due to the default scheme settings)
+            var claimsIdentity = new ClaimsIdentity(claims, "AlikFormAuthenticated");
             var authProperties = new AuthenticationProperties
             {
                 IsPersistent = true
@@ -48,7 +46,6 @@ public class AuthController : ControllerBase
 
             //saving the auth data (to cookies)
             await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
 
