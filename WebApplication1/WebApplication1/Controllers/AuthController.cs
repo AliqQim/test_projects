@@ -20,6 +20,9 @@ public class AuthController : ControllerBase
     [HttpGet("logout")]
     public async Task<IActionResult> Logout()
     {
+
+        //different cheme names here is okay , because google scheme is for our authentication,
+        //but at the end we use cookies to authenticate (google info is stored there)
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return Redirect("/app");
     }
