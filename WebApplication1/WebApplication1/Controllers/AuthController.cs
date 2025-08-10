@@ -37,12 +37,16 @@ public class AuthController : ControllerBase
             {
                 new Claim(ClaimTypes.Name, username)
             };
+
+            //the one who created a ClaimsIdentity - sets it's scheme of creation, which then is a part of the principal
+            //object which would be serialized in cookie
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var authProperties = new AuthenticationProperties
             {
                 IsPersistent = true
             };
 
+            //saving the auth data (to cookies)
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
@@ -51,7 +55,7 @@ public class AuthController : ControllerBase
             return Redirect("/app");
         }
 
-        return Unauthorized("Неверный логин или пароль");
+        return Unauthorized("Wrong login or password");
     }
 
 
