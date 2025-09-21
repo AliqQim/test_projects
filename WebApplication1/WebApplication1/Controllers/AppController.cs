@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.InteropServices;
 using System.Security.Claims;
 
 namespace WebApplication1.Controllers;
@@ -19,5 +21,8 @@ public class AppController : Controller
 
         return View();
     }
+
+    [Authorize]
+    public IActionResult Secret() => View();
 
 }
